@@ -1,0 +1,309 @@
+{# phase2_protocol.md.j2 — Phase II Clinical Trial Protocol scaffold
+   Per ICH E6(R2) / 21 CFR 312.23(a)(6) / CONSORT 2010
+
+   Variables:
+     drug             : dict — drug DB row
+     indication       : dict — indication DB row
+     run              : dict — pipeline run row
+     trial_design     : dict — parsed t2_trial_design JSON
+     dose_rationale   : dict — parsed t2_dose_rationale JSON
+     biomarkers       : list[dict] — parsed t2_biomarkers JSON
+     competitive      : dict — parsed t2_competitive_landscape JSON
+     synopsis         : str — LLM-generated synopsis
+     proposed_dose    : str
+     sample_size      : int|str
+     duration_months  : int|str
+     design_type      : str
+     primary_endpoint : dict
+     generated_at     : str
+     today            : str
+     protocol_version : str
+#}
+<!-- AUTO-GENERATED TRIAL PROTOCOL DRAFT — {{ generated_at }} -->
+<!-- Pipeline: clinical-trials-repurpose-core | Protocol version: {{ protocol_version }} -->
+<!-- WARNING: Computational scaffold. Requires qualified medical writer + regulatory review. -->
+
+---
+
+# Phase II Clinical Trial Protocol — Draft
+
+**Protocol Title**: A {{ trial_design.get("design_type", "Randomized") | title }} Study of
+{{ drug.name }} in Patients with {{ indication.name }}
+
+**Protocol Number**: [FILL IN: Sponsor protocol number]
+**Protocol Version**: {{ protocol_version }} / {{ today }}
+**EudraCT / IND Number**: [FILL IN]
+**Sponsor**: [FILL IN]
+**Principal Investigator**: [FILL IN]
+
+---
+
+## Synopsis
+
+{{ synopsis }}
+
+---
+
+## 1. Background and Rationale
+
+### 1.1 Disease Overview
+
+**Indication**: {{ indication.name }}
+{% if indication.icd10_code %}**ICD-10**: {{ indication.icd10_code }}{% endif %}
+{% if indication.orphan_status %}> ⭐ This is an **orphan** indication (estimated US prevalence ≤ 200,000).{% endif %}
+
+[FILL IN: 1-2 paragraph disease background: pathophysiology, disease burden, standard of care,
+unmet medical need. Cite peer-reviewed sources.]
+
+### 1.2 Investigational Drug
+
+| Field | Value |
+|---|---|
+| Drug | {{ drug.name }} ({{ drug.generic_name or drug.drug_id }}) |
+| Drug Type | {{ drug.drug_type or "Small molecule" }} |
+| Mechanism | {{ (drug.mechanism_of_action or "[FILL IN]")[:200] }} |
+| Half-life | {{ drug.half_life or "[FILL IN]" }} |
+| Approved Use | {{ (drug.approved_indications | join(", ") if drug.approved_indications else "[FILL IN]")[:150] }} |
+
+### 1.3 Rationale for Repurposing
+
+{{ run.get("t2_evidence_summary") or "[FILL IN: Mechanistic and evidential rationale for repurposing this drug in this indication. Reference preclinical data, epidemiological associations, or prior clinical observations.]" }}
+
+### 1.4 Competitive and IP Context
+
+{% if competitive %}
+- Active trials in indication: {{ competitive.get("n_active_trials_same_indication", "N/A") }}
+- Competitive assessment: **{{ competitive.get("overall_competitive_assessment", "N/A") | upper }}**
+- Freedom to operate: {{ competitive.get("freedom_to_operate", "N/A") | upper }}
+{% if competitive.get("differentiation_strategy") %}
+- Differentiation strategy: {{ competitive.differentiation_strategy }}
+{% endif %}
+{% else %}
+[FILL IN: Competitive landscape and IP/FTO assessment.]
+{% endif %}
+
+**FTO Risk**: {{ run.get("fto_risk_level") or "NOT ASSESSED" }}{% if run.get("fto_risk_level") == "HIGH" %} ⚠ HIGH — review blocking patents before proceeding.{% endif %}
+
+---
+
+## 2. Study Objectives and Endpoints
+
+### 2.1 Primary Objective
+
+{% if primary_endpoint %}
+**Endpoint**: {{ primary_endpoint.get("endpoint", "[FILL IN]") }}
+**Timepoint**: {{ primary_endpoint.get("timepoint", "[FILL IN]") }}
+**Statistical threshold**: {{ primary_endpoint.get("statistical_threshold", "p < 0.05") }}
+{% else %}
+[FILL IN: Primary efficacy endpoint, measurement timepoint, and success criterion.]
+{% endif %}
+
+### 2.2 Secondary Objectives
+
+{% if trial_design.get("secondary_endpoints") %}
+{% for ep in trial_design.secondary_endpoints %}
+{{ loop.index }}. {{ ep }}
+{% endfor %}
+{% else %}
+[FILL IN: Secondary endpoints (safety, PK, biomarker, QoL measures).]
+{% endif %}
+
+### 2.3 Exploratory Endpoints
+
+[FILL IN: Biomarker response, mechanistic read-outs, PD endpoints per § 1.3 rationale.]
+
+---
+
+## 3. Study Design
+
+**Design**: {{ trial_design.get("design_type", "[FILL IN]") | replace("_", " ") | title }}
+**Blinding**: {{ trial_design.get("blinding", "[FILL IN]") | replace("_", " ") | title }}
+**Control Arm**: {{ trial_design.get("control_arm", "[FILL IN]") | replace("_", " ") | title }}
+**Duration**: {{ duration_months }} months (plus follow-up — [FILL IN])
+
+[FILL IN: CONSORT flow diagram (see checklist). Randomization method, allocation concealment,
+stratification factors (disease severity, biomarker status).]
+
+---
+
+## 4. Study Population
+
+### 4.1 Inclusion Criteria
+
+{% if trial_design.get("inclusion_criteria") %}
+Patients must meet ALL of the following:
+{% for c in trial_design.inclusion_criteria %}
+{{ loop.index }}. {{ c }}
+{% endfor %}
+{% else %}
+[FILL IN: Age range, confirmed diagnosis, ECOG/WHO performance status, wash-out periods,
+informed consent capacity, reproductive status criteria.]
+{% endif %}
+
+### 4.2 Exclusion Criteria
+
+{% if trial_design.get("exclusion_criteria") %}
+Patients must meet NONE of the following:
+{% for c in trial_design.exclusion_criteria %}
+{{ loop.index }}. {{ c }}
+{% endfor %}
+{% else %}
+[FILL IN: Contraindications to study drug, serious comorbidities, active malignancy,
+organ dysfunction, prohibited concomitant medications, pregnancy/lactation.]
+{% endif %}
+
+### 4.3 Biomarker Enrichment Strategy
+
+{% if trial_design.get("biomarker_enrichment") %}
+**Strategy**: {{ trial_design.biomarker_enrichment.get("enrichment_strategy", "[FILL IN]") }}
+**Threshold**: {{ trial_design.biomarker_enrichment.get("biomarker_threshold", "[FILL IN]") }}
+{% elif biomarkers %}
+Patient selection biomarkers identified by pipeline:
+{% for bm in biomarkers[:5] %}
+- **{{ bm.get("biomarker", "?") }}** ({{ bm.get("type", "?") }}): {{ bm.get("rationale", "") }}
+  Measurement: {{ bm.get("measurement", "") }}
+{% endfor %}
+{% else %}
+[FILL IN: Biomarker enrichment strategy or state "all-comers" with justification.]
+{% endif %}
+
+---
+
+## 5. Study Treatments
+
+### 5.1 Investigational Drug
+
+**Drug**: {{ drug.name }}
+**Proposed Dose**: {{ proposed_dose }}
+
+{% if dose_rationale %}
+**Dose Rationale**: {{ dose_rationale.get("dose_rationale", "[FILL IN]") }}
+
+**PK Considerations**: {{ dose_rationale.get("pk_considerations", "[FILL IN]") }}
+
+**Safety Margin**: {{ dose_rationale.get("safety_margin", "[FILL IN]") }}
+
+{% if dose_rationale.get("dose_range_for_trial") %}
+**Planned Dose Arms**:
+| Arm | Dose |
+|---|---|
+| Low | {{ dose_rationale.dose_range_for_trial.get("low", "TBD") }} |
+| Mid | {{ dose_rationale.dose_range_for_trial.get("mid", "TBD") }} |
+| High | {{ dose_rationale.dose_range_for_trial.get("high", "TBD") }} |
+{% endif %}
+
+{% if dose_rationale.get("dose_finding_needed") %}
+> ⚠ **Dose-finding Phase I study recommended before Phase II enrollment.** (Confidence: {{ dose_rationale.get("confidence", "?") }})
+{% endif %}
+{% else %}
+[FILL IN: Dose, route of administration, schedule, duration of treatment,
+dose modifications for AEs, supply and accountability.]
+{% endif %}
+
+### 5.2 Control Arm
+
+**Control**: {{ trial_design.get("control_arm", "[FILL IN]") | replace("_", " ") | title }}
+
+[FILL IN: Placebo formulation, blinding procedures, or standard-of-care regimen details.]
+
+### 5.3 Concomitant Medications
+
+[FILL IN: Permitted and prohibited concomitant medications. Wash-out requirements.]
+
+---
+
+## 6. Study Procedures
+
+[FILL IN: Visit schedule (screening, baseline, on-treatment visits at specified weeks,
+end-of-treatment, follow-up). Assessments at each visit: clinical, laboratory, imaging,
+biomarker. Case report forms (CRFs).]
+
+---
+
+## 7. Statistical Analysis Plan
+
+### 7.1 Sample Size
+
+{% if trial_design.get("sample_size") %}
+| Parameter | Value |
+|---|---|
+| Target n | {{ trial_design.sample_size.get("n", "[FILL IN]") }} |
+| Power | {{ trial_design.sample_size.get("power", 0.8) * 100 | int }}% |
+| Alpha | {{ trial_design.sample_size.get("alpha", 0.05) }} (two-sided) |
+| Rationale | {{ trial_design.sample_size.get("rationale", "[FILL IN]") }} |
+{% else %}
+[FILL IN: Sample size calculation with power, alpha, assumed effect size, dropout rate.]
+{% endif %}
+
+### 7.2 Analysis Populations
+
+- **ITT (Intent-to-treat)**: all randomized patients (primary)
+- **PP (Per-protocol)**: patients completing ≥ [FILL IN]% of planned treatment
+- **Safety**: all patients receiving ≥ 1 dose
+
+### 7.3 Primary Analysis
+
+[FILL IN: Statistical test for primary endpoint, multiplicity adjustment, interim
+analysis plan (if adaptive design), DSMB stopping rules.]
+
+### 7.4 Subgroup Analyses
+
+[FILL IN: Pre-specified subgroups (biomarker-positive vs -negative, severity strata).]
+
+---
+
+## 8. Safety Monitoring
+
+### 8.1 Adverse Event Definitions
+
+[FILL IN: AE, SAE, SUSAR definitions per ICH E2A. MedDRA coding. CTCAE grading.]
+
+### 8.2 Stopping Rules
+
+[FILL IN: Protocol-specified stopping criteria (DMC/DSMB charter, pre-defined futility
+boundaries, aggregate SAE thresholds).]
+
+### 8.3 Known Safety Concerns
+
+{% if drug.black_box_warnings %}
+> ⚠ **Black Box Warning(s)**: {{ drug.black_box_warnings | join("; ") if drug.black_box_warnings is iterable and drug.black_box_warnings is not string else drug.black_box_warnings }}
+{% else %}
+No boxed warnings for {{ drug.name }}. See current prescribing information for full safety profile.
+{% endif %}
+
+{% if trial_design.get("key_risks") %}
+**Key Protocol-Identified Risks**:
+{% for r in trial_design.key_risks %}
+- {{ r }}
+{% endfor %}
+{% endif %}
+
+---
+
+## 9. Regulatory and Ethical Considerations
+
+{% if trial_design.get("regulatory_considerations") %}
+{{ trial_design.regulatory_considerations }}
+{% endif %}
+
+[FILL IN:
+- IND (21 CFR 312) or CTA (EU CTR) filing plan
+- IRB/IEC approval requirements
+- Informed consent process (ICH E6(R2) §4.8)
+- Data privacy (HIPAA / GDPR)
+- Trial registration (ClinicalTrials.gov before first enrollment)
+- GCP compliance statement
+]
+
+---
+
+## 10. References
+
+[FILL IN: Full bibliography in AMA format. Include key refs for disease, mechanism,
+prior relevant trials, statistical methods.]
+
+---
+
+*Protocol draft generated {{ generated_at }} by clinical-trials-repurpose-core pipeline.*
+*CONSORT checklist: see CONSORT_CHECKLIST accompanying this file.*
+*This document requires qualified medical writer, sponsor legal, and IRB review before activation.*

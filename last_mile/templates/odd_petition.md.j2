@@ -1,0 +1,167 @@
+{# odd_petition.md.j2 — FDA Orphan Drug Designation Petition scaffold
+   Per 21 CFR Part 316 (Orphan Drug Regulations)
+   Contact: FDA OOPD (Office of Orphan Products Development)
+   Submission form: FDA Form 4035 (cover sheet), plus this narrative
+
+   Variables:
+     drug             : dict — drug DB row
+     indication       : dict — indication DB row
+     run              : dict — pipeline run row (may be empty)
+     prevalence       : float — US prevalence estimate
+     orphan_us_threshold : int — 200,000
+     orphan_status    : bool
+     plausibility_text : str — LLM-generated medical plausibility
+     experience_text  : str — LLM-generated prior experience summary
+     bibliography     : list[dict] — [{pmid, title, year}]
+     trials           : list[dict] — matching clinical trials
+     generated_at     : str — ISO datetime
+     today            : str — YYYY-MM-DD
+#}
+<!-- AUTO-GENERATED ODD PETITION DRAFT — {{ generated_at }} -->
+<!-- Pipeline: clinical-trials-repurpose-core -->
+<!-- WARNING: This is a computational scaffold. All [FILL IN] sections require
+     qualified clinical and regulatory review before submission to FDA OOPD. -->
+
+---
+
+# Orphan Drug Designation Request — Draft Petition
+
+**Drug**: {{ drug.name }}{% if drug.generic_name %} ({{ drug.generic_name }}){% endif %}
+**Indication**: {{ indication.name }}{% if indication.icd10_code %} (ICD-10: {{ indication.icd10_code }}){% endif %}
+**Date**: {{ today }}
+**Version**: 0.1-DRAFT
+
+---
+
+## FDA Form 4035 Cover Sheet
+
+> [FILL IN: Complete FDA Form 4035 electronically at the Orphan Drug Designation
+> submission portal. Required fields: sponsor name, address, contact, drug name,
+> proposed indication, rare disease justification method selected (prevalence or
+> medically plausible subset).]
+
+---
+
+## Section I — Cover Letter
+
+[FILL IN: Sponsor letterhead, date, OOPD address, reference "Re: Request for
+Orphan Drug Designation for {{ drug.name }} in {{ indication.name }}",
+contact name/title/email/phone, brief 2-sentence description of request.]
+
+---
+
+## Section II — Drug Description
+
+### 2.1 Drug Name and Identification
+
+| Field | Value |
+|---|---|
+| Generic Name (INN) | {{ drug.generic_name or drug.name }} |
+| Brand Name(s) | {{ drug.brand_names | join(", ") if drug.brand_names else "N/A" }} |
+| Drug Type | {{ drug.drug_type or "N/A" }} |
+| Approval Status | {{ drug.status or "Approved" }} |
+| Approval Date | {{ drug.approval_date or "See label" }} |
+| Molecular Formula | {{ drug.molecular_formula or "[FILL IN]" }} |
+| Molecular Weight | {{ "%.1f"|format(drug.mw) if drug.mw else "[FILL IN]" }} Da |
+| InChI Key | {{ drug.inchi_key or "[FILL IN]" }} |
+
+### 2.2 Mechanism of Action
+
+{{ drug.mechanism_of_action or "[FILL IN: Mechanism of action relevant to proposed indication]" }}
+
+### 2.3 Approved Indication(s) and Dosing
+
+{% if drug.approved_indications %}
+Currently approved for:
+{% for ai in (drug.approved_indications if drug.approved_indications is iterable and drug.approved_indications is not string else [drug.approved_indications]) %}
+- {{ ai }}
+{% endfor %}
+{% else %}
+[FILL IN: List approved indications and approved dose/schedule per product label.]
+{% endif %}
+
+**Pharmacokinetics**: Half-life {{ drug.half_life or "[FILL IN]" }}; bioavailability {{ "%.0f%%"|format(drug.bioavailability * 100) if drug.bioavailability else "[FILL IN]" }}; protein binding {{ "%.0f%%"|format(drug.protein_binding * 100) if drug.protein_binding else "[FILL IN]" }}.
+
+---
+
+## Section III — Disease Description and Prevalence Justification
+
+### 3.1 Disease Description
+
+**Disease**: {{ indication.name }}
+{% if indication.mesh_id %}**MeSH**: {{ indication.mesh_id }}{% endif %}
+{% if indication.orphanet_id %}**Orphanet**: {{ indication.orphanet_id }}{% endif %}
+{% if indication.omim_id %}**OMIM**: {{ indication.omim_id }}{% endif %}
+
+[FILL IN: 1-2 paragraph disease description covering pathophysiology, natural history,
+current standard of care, and unmet need. Cite peer-reviewed sources.]
+
+### 3.2 Prevalence Justification
+
+{% if prevalence and prevalence > 0 %}
+**Estimated US Prevalence**: {{ "{:,.0f}".format(prevalence) }} persons
+{% if prevalence < orphan_us_threshold %}
+This disease affects fewer than {{ "{:,}".format(orphan_us_threshold) }} persons in the United States,
+meeting the prevalence criterion for orphan drug designation under 21 U.S.C. § 360bb(a)(2)(A).
+{% else %}
+> ⚠ Estimated prevalence ({{ "{:,.0f}".format(prevalence) }}) exceeds the {{ "{:,}".format(orphan_us_threshold) }}
+> threshold. Designation must be justified on the basis that there is no reasonable expectation
+> that the drug will recover development and marketing costs (21 U.S.C. § 360bb(a)(2)(B)),
+> OR a medically plausible patient subset must be identified that is ≤ {{ "{:,}".format(orphan_us_threshold) }}.
+{% endif %}
+{% else %}
+[FILL IN: Provide prevalence estimate with source (Orphanet, NORD, NCHS, published epidemiological
+studies). Estimate must account for US population only. If based on world prevalence, apply
+US fraction (approx. 4.2% of world population). Include confidence interval if available.]
+{% endif %}
+
+**Data Source(s)**: [FILL IN: Orphanet, NORD, peer-reviewed prevalence studies with citations]
+
+---
+
+## Section IV — Medical Plausibility
+
+{{ plausibility_text }}
+
+---
+
+## Section V — Prior Clinical Experience
+
+{{ experience_text }}
+
+{% if trials %}
+### 5.1 Relevant Clinical Trials
+
+| Trial ID | Phase | Status | Sponsor | Outcome |
+|---|---|---|---|---|
+{% for t in trials %}
+| {{ t.trial_id or "N/A" }} | {{ t.phase or "N/A" }} | {{ t.status or "N/A" }} | {{ t.sponsor or "N/A" }} | {{ (t.result_summary or "Pending")[:60] }} |
+{% endfor %}
+{% endif %}
+
+---
+
+## Section VI — Bibliography
+
+{% if bibliography %}
+{% for ref in bibliography %}
+{{ loop.index }}. {{ ref.title }} ({{ ref.year }}).{% if ref.pmid %} PMID: {{ ref.pmid }}.{% endif %}
+
+{% endfor %}
+{% else %}
+[FILL IN: Insert full bibliography in AMA format. Minimum 5 peer-reviewed references
+supporting sections III-V above.]
+{% endif %}
+
+---
+
+## Certification
+
+[FILL IN: Sponsor authorized representative signature block, date, and statement:
+"I certify that the information contained herein is accurate and complete to the
+best of my knowledge and belief."]
+
+---
+
+*Draft generated {{ generated_at }} by clinical-trials-repurpose-core pipeline.*
+*This document requires qualified legal, medical, and regulatory review before submission.*

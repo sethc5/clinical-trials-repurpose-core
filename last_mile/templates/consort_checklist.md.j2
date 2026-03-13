@@ -1,0 +1,164 @@
+{# consort_checklist.md.j2 — CONSORT 2010 checklist for repurposing Phase II trials
+   Reference: Schulz KF et al. CONSORT 2010 Statement. BMJ 2010;340:c332
+   Extension: Zwarenstein M et al. CONSORT 2010 extension for pragmatic trials.
+
+   Variables:
+     drug             : dict
+     indication       : dict
+     protocol_version : str
+     today            : str
+     generated_at     : str
+#}
+<!-- CONSORT 2010 CHECKLIST — {{ generated_at }} -->
+
+# CONSORT 2010 Checklist
+
+**Trial**: {{ drug.name }} in {{ indication.name }}
+**Protocol version**: {{ protocol_version }} / {{ today }}
+
+Instructions: Mark each item as ✅ Complete | 🔶 Partial | ❌ Missing.
+
+---
+
+## Title and Abstract
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 1a | Identification as a randomised trial in the title | ❌ | Title page |
+| 1b | Structured summary of trial design, methods, participants, interventions, results, and conclusions | ❌ | Synopsis |
+
+## Introduction
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 2a | Scientific background and explanation of rationale | ❌ | §1.3 |
+| 2b | Specific objectives or hypotheses | ❌ | §2 |
+
+## Methods — Participants
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 3a | Eligibility criteria for participants | ❌ | §4.1-4.2 |
+| 3b | Settings and locations where data were collected | ❌ | [FILL IN] |
+
+## Methods — Interventions
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 4a | Interventions for each group with sufficient detail to allow replication | ❌ | §5 |
+| 4b | Any changes to interventions after trial commencement (e.g., eligibility criteria) | ❌ | [FILL IN] |
+
+## Methods — Outcomes
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 5 | Pre-specified primary and secondary outcome measures and when/how they were assessed | ❌ | §2 |
+
+## Methods — Sample Size
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 7a | How sample size was determined | ❌ | §7.1 |
+| 7b | When applicable, explanation of any interim analyses and stopping guidelines | ❌ | §7.3 |
+
+## Methods — Randomisation
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 8a | Method used to generate random allocation sequence | ❌ | §3 / [FILL IN] |
+| 8b | Type of randomisation; details of any restriction | ❌ | §3 / [FILL IN] |
+| 9 | Mechanism used to implement the random allocation sequence | ❌ | [FILL IN] |
+| 10 | Who generated the random allocation sequence, who enrolled participants, and who assigned participants to interventions | ❌ | [FILL IN] |
+
+## Methods — Blinding
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 11a | If done, who was blinded after assignment to interventions | ❌ | §3 |
+| 11b | If relevant, description of the similarity of interventions | ❌ | §5.2 |
+
+## Methods — Statistical Methods
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 12a | Statistical methods used to compare groups for primary and secondary outcomes | ❌ | §7.3 |
+| 12b | Methods for additional analyses, such as subgroup analyses and adjusted analyses | ❌ | §7.4 |
+
+## Results — Participant Flow
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 13a | For each group, the numbers of participants who were randomly assigned, received intended treatment, and were analysed for the primary outcome | ❌ | TBD (post-trial) |
+| 13b | For each group, losses and exclusions after randomisation, together with reasons | ❌ | TBD (post-trial) |
+
+## Results — Recruitment
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 14a | Dates defining the periods of recruitment and follow-up | ❌ | [FILL IN] |
+| 14b | Why the trial ended or was stopped | ❌ | TBD |
+
+## Results — Baseline Data
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 15 | A table showing baseline demographic and clinical characteristics for each group | ❌ | TBD (post-trial) |
+
+## Results — Numbers Analysed
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 16 | For each group, number of participants (denominator) included in each analysis and whether the analysis was by original assigned groups | ❌ | TBD (post-trial) |
+
+## Results — Outcomes and Estimation
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 17a | For each primary and secondary outcome, results for each group, and the estimated effect size and its precision (such as 95% CI) | ❌ | TBD (post-trial) |
+| 17b | For binary outcomes, presentation of both absolute and relative effect sizes is recommended | ❌ | TBD (post-trial) |
+
+## Results — Ancillary Analyses
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 18 | Results of any other analyses performed, including subgroup analyses and adjusted analyses, distinguishing pre-specified from exploratory | ❌ | TBD (post-trial) |
+
+## Results — Harms
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 19 | All important harms or unintended effects in each group | ❌ | TBD (post-trial) |
+
+## Discussion
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 20 | Trial limitations, addressing sources of potential bias, imprecision, and, if relevant, multiplicity of analyses | ❌ | TBD (post-trial) |
+| 21 | Generalisability (external validity, applicability) of the trial findings | ❌ | TBD (post-trial) |
+| 22 | Interpretation consistent with results, balancing benefits and harms, and considering other relevant evidence | ❌ | TBD (post-trial) |
+
+## Other Information
+
+| # | Item | Status | Location |
+|---|---|---|---|
+| 23 | Registration number and name of trial registry | ❌ | [FILL IN: ClinicalTrials.gov NCT number] |
+| 24 | Where the full trial protocol can be accessed, if available | ❌ | [FILL IN] |
+| 25 | Sources of funding and other support (such as supply of drugs); role of funders | ❌ | [FILL IN] |
+
+---
+
+## Repurposing-Specific Extensions
+
+| Item | Status | Notes |
+|---|---|---|
+| Approved drug reference label cited | ❌ | [FILL IN: FDA label / EMA SmPC] |
+| § 505(b)(2) / hybrid regulatory path assessed | ❌ | [FILL IN] |
+| Off-label use risks disclosed in consent | ❌ | [FILL IN] |
+| FTO / method-of-use patent risk assessed | {{ "✅" if run is defined and run.get("fto_risk_level") and run.fto_risk_level != "UNKNOWN" else "❌" }} | Risk level: {{ run.get("fto_risk_level", "NOT ASSESSED") if run is defined else "N/A" }} |
+| Orphan Drug Designation sought (if eligible) | ❌ | See ODD petition document |
+| Biomarker enrichment strategy documented | ❌ | §4.3 |
+
+---
+
+*Checklist generated {{ generated_at }} by clinical-trials-repurpose-core pipeline.*
+*Reference: Schulz KF, Altman DG, Moher D; CONSORT Group. CONSORT 2010 Statement. BMJ 2010;340:c332.*

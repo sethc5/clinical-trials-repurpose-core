@@ -1,0 +1,58 @@
+project:
+  name: longevity-repurposing-test
+  description: "Smoke test targeting longevity/aging to validate pipeline against known pairs"
+  version: "0.1.0"
+
+target:
+  id: "aging_longevity"
+  disease_context: "aging"
+  description: "Drug repurposing for longevity and healthspan extension via mTOR/AMPK pathways"
+  unmet_need: "No approved longevity therapeutics; significant unmet need in aging population"
+  pathway_ids:
+    - "hsa04150"   # mTOR signaling
+    - "hsa04152"   # AMPK signaling
+    - "hsa04210"   # Apoptosis
+    - "hsa04110"   # Cell cycle
+    - "hsa04115"   # p53 signaling
+  priority_mechanisms:
+    - "mTOR inhibition"
+    - "AMPK activation"
+    - "senolytic"
+
+drug_universe:
+  sources: ["drugbank", "chembl", "fda_approved"]
+  drug_types: ["small_molecule"]
+  status_filter: ["approved", "investigational_phase2+"]
+  include_shelved: true
+
+filters:
+  t0:
+    min_pathway_overlap_jaccard: 0.05
+    require_mechanism_pathway_overlap: true
+    exclude_black_box_for_population: false
+    exclude_active_trials_same_indication: false
+    exclude_definitive_trial_failures: true
+  t025:
+    failed_trial_handling: "flag_not_exclude"
+  t1:
+    llm_model: "google/gemini-2.5-flash-lite"
+    min_evidence_score: 0.4
+    min_mechanistic_score: 0.35
+    min_safety_score: 0.5
+  t2:
+    llm_model: "google/gemini-2.5-flash-lite"
+    min_confidence: 0.5
+    generate_trial_design: true
+    trial_design_phase: "Phase_2"
+
+compute:
+  workers: 8
+  llm_workers: 4
+  batch_size: 500
+  cache_llm_responses: true
+
+output:
+  db_path: "results/longevity_test.db"
+  receipts_dir: "results/longevity_receipts"
+  results_dir: "results/longevity_results"
+  top_n: 30

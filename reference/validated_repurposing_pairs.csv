@@ -1,0 +1,21 @@
+drug_name,drug_id,indication_name,indication_id,repurposing_success,source,notes
+Metformin,DB00331,Longevity / healthspan extension,C0001衰老,true,ITP mouse trials,Reduces ACM in multiple mouse strains; NIA ITP data
+Rapamycin,DB00877,Longevity,C0001aging,true,ITP mouse trials,mTOR inhibition; strong ITP longevity data
+Acarbose,DB00284,Longevity,C0001aging,true,ITP mouse trials,Alpha-glucosidase inhibitor; ITP male mice lifespan
+Sildenafil,DB00203,Pulmonary arterial hypertension,C0340106,true,FDA approval 2005,Repurposed from angina/erectile dysfunction
+Thalidomide,DB01041,Multiple myeloma,C0026764,true,FDA approval 2006,Originally sedative/morning sickness; IMiD mechanism discovered in myeloma
+Methotrexate,DB00563,Rheumatoid arthritis,C0003873,true,Clinical practice,Originally cancer chemotherapy; now standard DMARDs for RA
+Finasteride,DB01216,Androgenic alopecia,C0162269,true,FDA approval 1997,5AR inhibitor; repurposed from BPH
+Colchicine,DB01394,Pericarditis,C0031154,true,Clinical trials COPE/ICAP,Anti-inflammatory; well-established pericarditis prevention
+Aspirin,DB00945,Colorectal cancer prevention,C0009402,true,Observational + RCT data,COX inhibition; prospective observational and some RCT support
+Doxycycline,DB00254,Abdominal aortic aneurysm,C0162871,true,Phase II trials,MMP inhibitor; reduces AAA expansion in trials
+Hydroxychloroquine,DB01611,Lupus / Rheumatoid arthritis,C0024141,true,Standard of care,Originally antimalarial; autoimmune repurposing
+Imatinib,DB00619,Pulmonary arterial hypertension,C0340106,true,Phase II trials,PDGFR/BCR-ABL; off-target PAH benefit
+Valproic acid,DB00313,Bipolar disorder,C0005586,true,Clinical practice,Original epilepsy drug; repurposed to mood stabilizer
+Minoxidil,DB00350,Androgenic alopecia,C0162269,true,FDA OTC approval 1996,Originally antihypertensive; vasodilator scalp effect
+Spironolactone,DB00441,Acne vulgaris,C0000142,true,Clinical practice,Aldosterone antagonist; anti-androgen effect in acne
+Naltrexone,DB00704,Fibromyalgia (low dose),C0016053,true,Pilot studies,Opioid antagonist; low-dose glial TLR4 effect
+Rituximab,DB00073,Multiple sclerosis (NMOSD),C0751384,true,FDA approval 2019,Anti-CD20; B-cell depletion in NMO spectrum disorder
+Empagliflozin,DB09038,Heart failure (HFrEF),C0018801,true,EMPA-REG OUTCOME,SGLT2i; cardiac benefit independent of glycemic control
+Canagliflozin,DB09081,Chronic kidney disease,C1561828,true,CREDENCE trial,SGLT2i nephroprotection
+Semaglutide,DB14541,NASH / MAFLD,C3887512,true,Phase II trials,GLP-1 RA; liver fat reduction and fibrosis improvement
