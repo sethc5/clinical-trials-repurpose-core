@@ -210,6 +210,34 @@ CREATE TABLE IF NOT EXISTS biochem_intake_candidates (
     created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(intake_run_id, compound_id)
 );
+
+CREATE TABLE IF NOT EXISTS clinical_build_runs (
+    build_run_id            TEXT PRIMARY KEY,
+    intake_run_id           TEXT NOT NULL REFERENCES biochem_intake_runs(intake_run_id),
+    profile_name            TEXT NOT NULL,
+    profile_version         TEXT,
+    profile_json            TEXT,
+    created_utc             TIMESTAMP NOT NULL,
+    notes                   TEXT,
+    total_candidates        INTEGER NOT NULL,
+    included_candidates     INTEGER NOT NULL,
+    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS clinical_build_candidates (
+    build_candidate_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    build_run_id            TEXT NOT NULL REFERENCES clinical_build_runs(build_run_id) ON DELETE CASCADE,
+    intake_run_id           TEXT NOT NULL,
+    compound_id             TEXT NOT NULL,
+    target_id               TEXT NOT NULL,
+    included                BOOLEAN NOT NULL,
+    include_reason          TEXT,
+    score                   REAL,
+    rank_included           INTEGER,
+    metrics_json            TEXT,
+    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(build_run_id, compound_id, target_id)
+);
 """
 
 
@@ -526,4 +554,88 @@ class RepurposingDB:
         rows = [dict(r) for r in out]
         for row in rows:
             row["source_row_json"] = _pj(row.get("source_row_json"))
+        return rows
+
+    # ------------------------------------------------------------------
+    # Clinical build profiles (reusable knobs/sliders runs)
+    # ------------------------------------------------------------------
+
+    def upsert_clinical_build_run(self, build_run: dict) -> None:
+        row = {k: _j(v) if isinstance(v, (list, dict)) else v for k, v in build_run.items()}
+        if "build_run_id" not in row:
+            raise ValueError("build_run must include build_run_id")
+        cols = ", ".join(row)
+        placeholders = ", ".join(["?"] * len(row))
+        updates = ", ".join(f"{k}=excluded.{k}" for k in row if k != "build_run_id")
+        sql = f"""
+            INSERT INTO clinical_build_runs ({cols}) VALUES ({placeholders})
+            ON CONFLICT(build_run_id) DO UPDATE SET {updates}
+        """
+        with self._conn() as conn:
+            conn.execute(sql, list(row.values()))
+
+    def upsert_clinical_build_candidates(self, build_run_id: str, candidates: list[dict]) -> None:
+        if not candidates:
+            return
+
+        rows = []
+        for candidate in candidates:
+            for required in ("intake_run_id", "compound_id", "target_id"):
+                if not candidate.get(required):
+                    raise ValueError(f"candidate missing required field: {required}")
+            rows.append(
+                (
+                    build_run_id,
+                    candidate["intake_run_id"],
+                    candidate["compound_id"],
+                    candidate["target_id"],
+                    bool(candidate.get("included")),
+                    candidate.get("include_reason"),
+                    candidate.get("score"),
+                    candidate.get("rank_included"),
+                    _j(candidate.get("metrics_json")),
+                )
+            )
+
+        sql = """
+            INSERT INTO clinical_build_candidates (
+                build_run_id, intake_run_id, compound_id, target_id,
+                included, include_reason, score, rank_included, metrics_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(build_run_id, compound_id, target_id) DO UPDATE SET
+                intake_run_id=excluded.intake_run_id,
+                included=excluded.included,
+                include_reason=excluded.include_reason,
+                score=excluded.score,
+                rank_included=excluded.rank_included,
+                metrics_json=excluded.metrics_json
+        """
+        with self._conn() as conn:
+            conn.executemany(sql, rows)
+
+    def list_clinical_build_candidates(
+        self,
+        build_run_id: str,
+        included_only: bool = False,
+        limit: int | None = None,
+    ) -> list[dict]:
+        sql = """
+            SELECT build_run_id, intake_run_id, compound_id, target_id, included, include_reason, score, rank_included, metrics_json
+            FROM clinical_build_candidates
+            WHERE build_run_id=?
+        """
+        params: list[Any] = [build_run_id]
+        if included_only:
+            sql += " AND included=1"
+        sql += " ORDER BY included DESC, COALESCE(rank_included, 2147483647), score DESC, compound_id"
+        if limit is not None:
+            sql += " LIMIT ?"
+            params.append(limit)
+
+        with self._conn() as conn:
+            out = conn.execute(sql, params).fetchall()
+
+        rows = [dict(r) for r in out]
+        for row in rows:
+            row["metrics_json"] = _pj(row.get("metrics_json"))
         return rows

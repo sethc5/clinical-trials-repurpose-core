@@ -1,0 +1,66 @@
+version: "1.0"
+
+profiles:
+  provisional_tb:
+    description: "Exploratory build while biochem T2 reruns are still in progress."
+    gates:
+      require_t2_metrics: false
+      max_t1_score: -9.50
+      max_rank_t1: 150
+      max_t2_rmsd: 5.60
+      min_t2_persistence: 0.08
+    scoring:
+      weights:
+        t1_score: 0.35
+        t2_persistence: 0.30
+        t2_rmsd: 0.20
+        rank_t1: 0.15
+      ranges:
+        t1_score_min: -12.50
+        t1_score_max: -8.00
+        t2_persistence_min: 0.00
+        t2_persistence_max: 1.00
+        t2_rmsd_min: 2.00
+        t2_rmsd_max: 12.00
+        rank_t1_min: 1
+        rank_t1_max: 200
+      defaults:
+        t1_score: -8.00
+        t2_persistence: 0.00
+        t2_rmsd: 12.00
+        rank_t1: 200
+    selection:
+      top_k: 25
+      include_gate_failures: false
+
+  strict_tb:
+    description: "Post-rerun strict build for handoff-quality candidates."
+    gates:
+      require_t2_metrics: true
+      max_t1_score: -10.00
+      max_rank_t1: 80
+      max_t2_rmsd: 5.50
+      min_t2_persistence: 0.09
+    scoring:
+      weights:
+        t1_score: 0.30
+        t2_persistence: 0.35
+        t2_rmsd: 0.25
+        rank_t1: 0.10
+      ranges:
+        t1_score_min: -12.50
+        t1_score_max: -8.00
+        t2_persistence_min: 0.00
+        t2_persistence_max: 1.00
+        t2_rmsd_min: 2.00
+        t2_rmsd_max: 10.00
+        rank_t1_min: 1
+        rank_t1_max: 120
+      defaults:
+        t1_score: -8.00
+        t2_persistence: 0.00
+        t2_rmsd: 10.00
+        rank_t1: 120
+    selection:
+      top_k: 15
+      include_gate_failures: false
