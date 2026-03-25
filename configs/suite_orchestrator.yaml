@@ -1,0 +1,68 @@
+paths:
+  suite_root: /home/seth/dev/medicine/suite_handoff
+  genomics_repo: /home/seth/dev/medicine/genomics_pipeline_core
+  biochem_repo: /home/seth/dev/medicine/biochem-pipeline-core
+  clinical_repo: /home/seth/dev/medicine/clinical-trials-repurpose-core
+
+commands:
+  genomics_export_handoff: >
+    cd {genomics_repo} &&
+    python3 scripts/export_handoff_targets.py
+    --db {genomics_db}
+    --target-id {genomics_target_id}
+    --state handoff_to_biochem
+    --top {top}
+    --suite-root {suite_root}
+
+  biochem_finalize_export: >
+    cd {biochem_repo} &&
+    python3 scripts/finalize_t2_pipeline.py
+    --config {biochem_config}
+    --top {top}
+    --handoff-state {handoff_state}
+    --suite-root {suite_root}
+
+  clinical_import: >
+    cd {clinical_repo} &&
+    python3 scripts/import_biochem_handoff.py
+    --package {package}
+    --suite-root {suite_root}
+    --db {clinical_db}
+
+  clinical_build: >
+    cd {clinical_repo} &&
+    python3 scripts/clinical_build.py
+    --db {clinical_db}
+    --intake-run-id {intake_run_id}
+    --profile-config {profile_config}
+    --profile {profile}
+
+profiles:
+  local:
+    paths: {}
+    commands: {}
+
+  # Example profile for remote biochem execution with local clinical orchestration.
+  hetzner:
+    paths:
+      biochem_repo: /opt/biochem
+    commands:
+      biochem_finalize_export: >
+        ssh hetzner "cd /opt/biochem &&
+        /opt/miniconda3/bin/python scripts/finalize_t2_pipeline.py
+        --config {biochem_config}
+        --top {top}
+        --handoff-state {handoff_state}
+        --suite-root {suite_root}"
+
+  # Flash/serverless profile is intentionally conservative until job wrappers are added.
+  # Keep orchestration semantics identical while allowing command-level overrides later.
+  runpod_flash:
+    paths: {}
+    commands: {}
+
+policy:
+  human_review_required:
+    - review_genomics_export
+    - review_biochem_export
+    - review_before_strict

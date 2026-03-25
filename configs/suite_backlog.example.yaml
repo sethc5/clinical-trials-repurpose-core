@@ -1,0 +1,32 @@
+jobs:
+  - job_id: genomics_amp_gram_negative_handoff
+    job_type: genomics_to_biochem
+    priority: 10
+    max_attempts: 2
+    genomics_db: results.db
+    genomics_target_id: amp_gram_negative
+    top: 200
+
+  - job_id: tb_inha_biochem_to_clinical
+    job_type: biochem_to_clinical
+    priority: 20
+    max_attempts: 3
+    biochem_config: configs/ntd_tb_inha.yaml
+    handoff_state: t2_validated
+    top: 50
+    clinical_db: results/repurposing.db
+    clinical_profile_config: configs/clinical_build_profiles.yaml
+    clinical_profile_provisional: provisional_tb
+    clinical_profile_strict: strict_tb
+
+  - job_id: tb_kasa_biochem_to_clinical
+    job_type: biochem_to_clinical
+    priority: 21
+    max_attempts: 3
+    biochem_config: configs/ntd_tb_kasa.yaml
+    handoff_state: t2_validated
+    top: 50
+    clinical_db: results/repurposing.db
+    clinical_profile_config: configs/clinical_build_profiles.yaml
+    clinical_profile_provisional: provisional_tb
+    clinical_profile_strict: strict_tb

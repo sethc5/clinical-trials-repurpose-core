@@ -784,6 +784,30 @@ python3 scripts/fetch_semantic_scholar_refs.py \
 
 ---
 
+## Suite Orchestration (MVP)
+
+Supervised cross-repo orchestration is available via:
+- `scripts/suite_orchestrator.py`
+- `configs/suite_orchestrator.yaml`
+- `configs/suite_backlog.example.yaml`
+- `docs/SUITE_ORCHESTRATION.md`
+
+This drives staged genomics -> biochem -> clinical flows with human review checkpoints.
+
+Backend switching is profile-driven:
+- `python3 scripts/suite_orchestrator.py --compute-profile local run-once`
+- `python3 scripts/suite_orchestrator.py --compute-profile hetzner run-once --execute`
+
+Low-cost compute policy and rollout plan:
+- `docs/COST_OPTIMIZED_COMPUTE_PLAN.md`
+- `reference/decisions/2026-03-25_suite_compute_policy_genomics_first.md`
+
+OpenRouter budget presets:
+- `configs/openrouter_budget_profiles.yaml`
+- `scripts/apply_openrouter_profile.py`
+
+---
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Highest value contributions:

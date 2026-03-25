@@ -6,3 +6,4 @@ Current convention:
 - `semantic_scholar/<timestamp>_<tag>.json` raw paper metadata
 - `semantic_scholar/<timestamp>_<tag>.bib` bibtex export
 - `semantic_scholar/<timestamp>_<tag>.md` human-readable summary
+- `web/<date>_<topic>.md` curated notes from operational docs/APIs (pricing, platform limits, routing controls)
