@@ -182,6 +182,34 @@ CREATE TABLE IF NOT EXISTS receipts (
     status              TEXT,
     filepath            TEXT
 );
+
+CREATE TABLE IF NOT EXISTS biochem_intake_runs (
+    intake_run_id           TEXT PRIMARY KEY,
+    source_run_id           TEXT NOT NULL,
+    source_repo             TEXT,
+    source_commit           TEXT,
+    source_package_path     TEXT NOT NULL,
+    imported_package_path   TEXT NOT NULL,
+    records                 INTEGER NOT NULL,
+    notes                   TEXT,
+    imported_utc            TIMESTAMP NOT NULL,
+    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS biochem_intake_candidates (
+    candidate_row_id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    intake_run_id           TEXT NOT NULL REFERENCES biochem_intake_runs(intake_run_id) ON DELETE CASCADE,
+    compound_id             TEXT NOT NULL,
+    smiles                  TEXT NOT NULL,
+    target_id               TEXT NOT NULL,
+    score_t1                REAL,
+    score_t2                REAL,
+    rank_t1                 INTEGER,
+    rank_t2                 INTEGER,
+    source_row_json         TEXT,
+    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(intake_run_id, compound_id)
+);
 """
 
 
@@ -421,3 +449,81 @@ class RepurposingDB:
         sql = f"INSERT OR REPLACE INTO receipts ({cols}) VALUES ({placeholders})"
         with self._conn() as conn:
             conn.execute(sql, list(receipt.values()))
+
+    # ------------------------------------------------------------------
+    # Biochem intake staging
+    # ------------------------------------------------------------------
+
+    def upsert_biochem_intake_run(self, intake_run: dict) -> None:
+        row = {k: _j(v) if isinstance(v, (list, dict)) else v for k, v in intake_run.items()}
+        if "intake_run_id" not in row:
+            raise ValueError("intake_run must include intake_run_id")
+        cols = ", ".join(row)
+        placeholders = ", ".join(["?"] * len(row))
+        updates = ", ".join(f"{k}=excluded.{k}" for k in row if k != "intake_run_id")
+        sql = f"""
+            INSERT INTO biochem_intake_runs ({cols}) VALUES ({placeholders})
+            ON CONFLICT(intake_run_id) DO UPDATE SET {updates}
+        """
+        with self._conn() as conn:
+            conn.execute(sql, list(row.values()))
+
+    def upsert_biochem_intake_candidates(self, intake_run_id: str, candidates: list[dict]) -> None:
+        if not candidates:
+            return
+
+        required = ("compound_id", "smiles", "target_id")
+        rows = []
+        for candidate in candidates:
+            missing = [col for col in required if not candidate.get(col)]
+            if missing:
+                raise ValueError(f"candidate missing required columns: {missing}")
+            rows.append(
+                (
+                    intake_run_id,
+                    candidate["compound_id"],
+                    candidate["smiles"],
+                    candidate["target_id"],
+                    candidate.get("score_t1"),
+                    candidate.get("score_t2"),
+                    candidate.get("rank_t1"),
+                    candidate.get("rank_t2"),
+                    _j(candidate.get("source_row_json")),
+                )
+            )
+
+        sql = """
+            INSERT INTO biochem_intake_candidates (
+                intake_run_id, compound_id, smiles, target_id,
+                score_t1, score_t2, rank_t1, rank_t2, source_row_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(intake_run_id, compound_id) DO UPDATE SET
+                smiles=excluded.smiles,
+                target_id=excluded.target_id,
+                score_t1=excluded.score_t1,
+                score_t2=excluded.score_t2,
+                rank_t1=excluded.rank_t1,
+                rank_t2=excluded.rank_t2,
+                source_row_json=excluded.source_row_json
+        """
+        with self._conn() as conn:
+            conn.executemany(sql, rows)
+
+    def list_biochem_intake_candidates(self, intake_run_id: str, limit: int | None = None) -> list[dict]:
+        sql = """
+            SELECT intake_run_id, compound_id, smiles, target_id, score_t1, score_t2, rank_t1, rank_t2, source_row_json
+            FROM biochem_intake_candidates
+            WHERE intake_run_id=?
+            ORDER BY COALESCE(rank_t2, rank_t1, 2147483647), compound_id
+        """
+        params: list[Any] = [intake_run_id]
+        if limit is not None:
+            sql += " LIMIT ?"
+            params.append(limit)
+
+        with self._conn() as conn:
+            out = conn.execute(sql, params).fetchall()
+        rows = [dict(r) for r in out]
+        for row in rows:
+            row["source_row_json"] = _pj(row.get("source_row_json"))
+        return rows
