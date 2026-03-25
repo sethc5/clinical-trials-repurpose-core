@@ -54,6 +54,12 @@ And exports a CSV in:
 - Can run provisional now and strict later against same intake lineage
 - Supports delta reruns by changing only profile or intake id
 
+## Evidence Ledger Link
+Profile changes should be documented in the reference ledger:
+- `reference/decisions/`
+- `reference/claims/`
+- `reference/sources/semantic_scholar/`
+
 ## CLI
 Build:
 ```bash

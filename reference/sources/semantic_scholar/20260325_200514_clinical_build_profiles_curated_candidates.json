@@ -1,0 +1,845 @@
+{
+  "generated_utc": "2026-03-25T20:05:23+00:00",
+  "tag": "clinical_build_profiles_curated_candidates",
+  "queries": [
+    {
+      "query": "Pushpakom drug repurposing progress challenges recommendations",
+      "n_results": 8
+    },
+    {
+      "query": "Himmelstein systematic integration of biomedical knowledge prioritizes drugs for repurposing",
+      "n_results": 2
+    },
+    {
+      "query": "Corsello Discovering the anticancer potential of non-oncology drugs by systematic viability profiling",
+      "n_results": 1
+    },
+    {
+      "query": "Lamb Connectivity Map using gene-expression signatures",
+      "n_results": 8
+    },
+    {
+      "query": "real world evidence randomized controlled trial hierarchy",
+      "n_results": 8
+    }
+  ],
+  "result_count_unique": 13,
+  "fields": [
+    "paperId",
+    "title",
+    "abstract",
+    "year",
+    "venue",
+    "publicationTypes",
+    "citationCount",
+    "influentialCitationCount",
+    "externalIds",
+    "url",
+    "authors.name",
+    "openAccessPdf"
+  ],
+  "filters": {
+    "min_citations": 10,
+    "year_from": 2000,
+    "year_to": null,
+    "require_term": []
+  },
+  "papers": [
+    {
+      "paperId": "2e39c86b27f849723e431a364c9ae27e89693d16",
+      "externalIds": {
+        "MAG": "2121604817",
+        "DOI": "10.1126/science.1132939",
+        "CorpusId": 8728079,
+        "PubMed": "17008526"
+      },
+      "url": "https://www.semanticscholar.org/paper/2e39c86b27f849723e431a364c9ae27e89693d16",
+      "title": "The Connectivity Map: Using Gene-Expression Signatures to Connect Small Molecules, Genes, and Disease",
+      "venue": "Science",
+      "year": 2006,
+      "citationCount": 4820,
+      "influentialCitationCount": 331,
+      "openAccessPdf": {
+        "url": "",
+        "status": "CLOSED",
+        "license": null,
+        "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1126/science.1132939?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1126/science.1132939, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "40403210",
+          "name": "J. Lamb"
+        },
+        {
+          "authorId": "144496046",
+          "name": "E. Crawford"
+        },
+        {
+          "authorId": "49113181",
+          "name": "David Peck"
+        },
+        {
+          "authorId": "50398669",
+          "name": "Joshua W. Modell"
+        },
+        {
+          "authorId": "5282180",
+          "name": "Irene C. Blat"
+        },
+        {
+          "authorId": "7642534",
+          "name": "Matthew J Wrobel"
+        },
+        {
+          "authorId": "49174892",
+          "name": "Jim Lerner"
+        },
+        {
+          "authorId": "2086185852",
+          "name": "Jean-Philippe Brunet"
+        },
+        {
+          "authorId": "145445964",
+          "name": "A. Subramanian"
+        },
+        {
+          "authorId": "145518187",
+          "name": "K. Ross"
+        },
+        {
+          "authorId": "48940636",
+          "name": "Michael Reich"
+        },
+        {
+          "authorId": "6417105",
+          "name": "H. Hieronymus"
+        },
+        {
+          "authorId": "48177665",
+          "name": "G. Wei"
+        },
+        {
+          "authorId": "2259247915",
+          "name": "S. Armstrong"
+        },
+        {
+          "authorId": "1906370",
+          "name": "S. Haggarty"
+        },
+        {
+          "authorId": "2633566",
+          "name": "P. Clemons"
+        },
+        {
+          "authorId": "2143698038",
+          "name": "R. Wei"
+        },
+        {
+          "authorId": "144298908",
+          "name": "S. Carr"
+        },
+        {
+          "authorId": "9311320",
+          "name": "E. Lander"
+        },
+        {
+          "authorId": "2900051",
+          "name": "T. Golub"
+        }
+      ],
+      "abstract": null
+    },
+    {
+      "paperId": "1faa34eb2e62f8953ec8c29c20626165f30df331",
+      "externalIds": {
+        "MAG": "2896002881",
+        "DOI": "10.1038/nrd.2018.168",
+        "CorpusId": 52965132,
+        "PubMed": "30310233"
+      },
+      "url": "https://www.semanticscholar.org/paper/1faa34eb2e62f8953ec8c29c20626165f30df331",
+      "title": "Drug repurposing: progress, challenges and recommendations",
+      "venue": "Nature reviews. Drug discovery",
+      "year": 2018,
+      "citationCount": 3649,
+      "influentialCitationCount": 104,
+      "openAccessPdf": {
+        "url": "",
+        "status": "CLOSED",
+        "license": null,
+        "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1038/nrd.2018.168?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1038/nrd.2018.168, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "Review",
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "6567582",
+          "name": "S. Pushpakom"
+        },
+        {
+          "authorId": "1841722",
+          "name": "Francesco Iorio"
+        },
+        {
+          "authorId": "6333322",
+          "name": "P. Eyers"
+        },
+        {
+          "authorId": "46871004",
+          "name": "K. J. Escott"
+        },
+        {
+          "authorId": "144967741",
+          "name": "Shirley Hopper"
+        },
+        {
+          "authorId": "2053192891",
+          "name": "A. Wells"
+        },
+        {
+          "authorId": "1970705",
+          "name": "A. Doig"
+        },
+        {
+          "authorId": "6526125",
+          "name": "Tim Guilliams"
+        },
+        {
+          "authorId": "2257049380",
+          "name": "J. Latimer"
+        },
+        {
+          "authorId": "122171919",
+          "name": "Christina McNamee"
+        },
+        {
+          "authorId": "47750073",
+          "name": "A. Norris"
+        },
+        {
+          "authorId": "2747542",
+          "name": "P. Sanseau"
+        },
+        {
+          "authorId": "5555171",
+          "name": "D. Cavalla"
+        },
+        {
+          "authorId": "5302767",
+          "name": "M. Pirmohamed"
+        }
+      ],
+      "abstract": null
+    },
+    {
+      "paperId": "ab89209b707a91ebe4ac9ce16fd3eeac4c3bdd0b",
+      "externalIds": {
+        "MAG": "3003119869",
+        "DOI": "10.1038/s43018-019-0018-6",
+        "CorpusId": 214051215,
+        "PubMed": "32613204"
+      },
+      "url": "https://www.semanticscholar.org/paper/ab89209b707a91ebe4ac9ce16fd3eeac4c3bdd0b",
+      "title": "Discovering the anticancer potential of non-oncology drugs by systematic viability profiling",
+      "venue": "Nature Cancer",
+      "year": 2020,
+      "citationCount": 654,
+      "influentialCitationCount": 41,
+      "openAccessPdf": {
+        "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7328899",
+        "status": "GREEN",
+        "license": null,
+        "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1038/s43018-019-0018-6?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1038/s43018-019-0018-6, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "9002179",
+          "name": "S. M. Corsello"
+        },
+        {
+          "authorId": "11600127",
+          "name": "Rohith T. Nagari"
+        },
+        {
+          "authorId": "49154882",
+          "name": "R. Spangler"
+        },
+        {
+          "authorId": "119743079",
+          "name": "J. Rossen"
+        },
+        {
+          "authorId": "3442410",
+          "name": "M. Kocak"
+        },
+        {
+          "authorId": "49579004",
+          "name": "Jordan G. Bryan"
+        },
+        {
+          "authorId": "21271559",
+          "name": "Ranad Humeidi"
+        },
+        {
+          "authorId": "49113181",
+          "name": "David Peck"
+        },
+        {
+          "authorId": "1491562111",
+          "name": "Xiaoyun Wu"
+        },
+        {
+          "authorId": "47158179",
+          "name": "A. Tang"
+        },
+        {
+          "authorId": "47037675",
+          "name": "Vickie M. Wang"
+        },
+        {
+          "authorId": "2936811",
+          "name": "Samantha A Bender"
+        },
+        {
+          "authorId": "1413614957",
+          "name": "E. Lemire"
+        },
+        {
+          "authorId": "145938844",
+          "name": "Rajiv Narayan"
+        },
+        {
+          "authorId": "145658177",
+          "name": "Philip Montgomery"
+        },
+        {
+          "authorId": "2406235127",
+          "name": "U. Ben-David"
+        },
+        {
+          "authorId": "7226655",
+          "name": "C. Garvie"
+        },
+        {
+          "authorId": "1519068478",
+          "name": "Yejia Chen"
+        },
+        {
+          "authorId": "40617199",
+          "name": "M. Rees"
+        },
+        {
+          "authorId": "33881363",
+          "name": "Nicholas J. Lyons"
+        },
+        {
+          "authorId": "48290324",
+          "name": "James M. McFarland"
+        },
+        {
+          "authorId": "2052265588",
+          "name": "Bang Wong"
+        },
+        {
+          "authorId": "2152715766",
+          "name": "Li Wang"
+        },
+        {
+          "authorId": "3602290",
+          "name": "N. Dumont"
+        },
+        {
+          "authorId": "1398967500",
+          "name": "Patrick J O'Hearn"
+        },
+        {
+          "authorId": "13544929",
+          "name": "Eric Stefan"
+        },
+        {
+          "authorId": "4051746",
+          "name": "John G Doench"
+        },
+        {
+          "authorId": "65776451",
+          "name": "C. Harrington"
+        },
+        {
+          "authorId": "152170532",
+          "name": "H. Greulich"
+        },
+        {
+          "authorId": "145046418",
+          "name": "M. Meyerson"
+        },
+        {
+          "authorId": "145237780",
+          "name": "F. Vazquez"
+        },
+        {
+          "authorId": "145445964",
+          "name": "A. Subramanian"
+        },
+        {
+          "authorId": "50281313",
+          "name": "J. Roth"
+        },
+        {
+          "authorId": "3097260",
+          "name": "Joshua A. Bittker"
+        },
+        {
+          "authorId": "47972856",
+          "name": "J. Boehm"
+        },
+        {
+          "authorId": "48507552",
+          "name": "C. Mader"
+        },
+        {
+          "authorId": "5268222",
+          "name": "Aviad Tsherniak"
+        },
+        {
+          "authorId": "2900051",
+          "name": "T. Golub"
+        }
+      ],
+      "abstract": null
+    },
+    {
+      "paperId": "1758eeac1b000571ee1eaf425abea72fc1ec6e9b",
+      "externalIds": {
+        "MAG": "2995120892",
+        "PubMedCentral": "5640425",
+        "DOI": "10.7554/eLife.26726",
+        "CorpusId": 4437414,
+        "PubMed": "28936969"
+      },
+      "url": "https://www.semanticscholar.org/paper/1758eeac1b000571ee1eaf425abea72fc1ec6e9b",
+      "title": "Systematic integration of biomedical knowledge prioritizes drugs for repurposing",
+      "venue": "bioRxiv",
+      "year": 2017,
+      "citationCount": 565,
+      "influentialCitationCount": 51,
+      "openAccessPdf": {
+        "url": "https://doi.org/10.7554/elife.26726",
+        "status": "GREEN",
+        "license": "CCBY",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC5640425, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "1868440",
+          "name": "Daniel S. Himmelstein"
+        },
+        {
+          "authorId": "3554460",
+          "name": "A. Lizee"
+        },
+        {
+          "authorId": "8339058",
+          "name": "C. Hessler"
+        },
+        {
+          "authorId": "2429171",
+          "name": "Leo Brueggeman"
+        },
+        {
+          "authorId": "50358513",
+          "name": "Sabrina L Chen"
+        },
+        {
+          "authorId": "48901174",
+          "name": "D. Hadley"
+        },
+        {
+          "authorId": "32046678",
+          "name": "A. Green"
+        },
+        {
+          "authorId": "1811880",
+          "name": "Pouya Khankhanian"
+        },
+        {
+          "authorId": "1823587",
+          "name": "S. Baranzini"
+        }
+      ],
+      "abstract": "The ability to computationally predict whether a compound treats a disease would improve the economy and success rate of drug approval. This study describes Project Rephetio to systematically model drug efficacy based on 755 existing treatments. First, we constructed Hetionet (neo4j.het.io), an integrative network encoding knowledge from millions of biomedical studies. Hetionet v1.0 consists of 47,031 nodes of 11 types and 2,250,197 relationships of 24 types. Data was integrated from 29 public resources to connect compounds, diseases, genes, anatomies, pathways, biological processes, molecular functions, cellular components, pharmacologic classes, side effects, and symptoms. Next, we identified network patterns that distinguish treatments from non-treatments. Then we predicted the probability of treatment for 209,168 compound\u2013disease pairs (het.io/repurpose). Our predictions validated on two external sets of treatment and provided pharmacological insights on epilepsy, suggesting they will help prioritize drug repurposing candidates. This study was entirely open and received realtime feedback from 40 community members."
+    },
+    {
+      "paperId": "a02f264718fe3e01339cb12e5f555bbb0ed8dcac",
+      "externalIds": {
+        "PubMedCentral": "6097073",
+        "MAG": "2810478122",
+        "DOI": "10.3346/jkms.2018.33.e213",
+        "CorpusId": 52050852,
+        "PubMed": "30127705"
+      },
+      "url": "https://www.semanticscholar.org/paper/a02f264718fe3e01339cb12e5f555bbb0ed8dcac",
+      "title": "Real-world Evidence versus Randomized Controlled Trial: Clinical Research Based on Electronic Medical Records",
+      "venue": "Journal of Korean medical science",
+      "year": 2018,
+      "citationCount": 332,
+      "influentialCitationCount": 13,
+      "openAccessPdf": {
+        "url": "https://doi.org/10.3346/jkms.2018.33.e213",
+        "status": "GOLD",
+        "license": "CCBYNC",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC6097073, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "2659902",
+          "name": "Hun\u2010Sung Kim"
+        },
+        {
+          "authorId": "2493327",
+          "name": "Suehyun Lee"
+        },
+        {
+          "authorId": "1590811126",
+          "name": "Ju Han Kim"
+        }
+      ],
+      "abstract": "Real-world evidence (RWE) and randomized control trial (RCT) data are considered mutually complementary. However, compared with RCT, the outcomes of RWE continue to be assigned lower credibility. It must be emphasized that RWE research is a real-world practice that does not need to be executed as RCT research for it to be reliable. The advantages and disadvantages of RWE must be discerned clearly, and then the proper protocol can be planned from the beginning of the research to secure as many samples as possible. Attention must be paid to privacy protection. Moreover, bias can be reduced meaningfully by reducing the number of dropouts through detailed and meticulous data quality management. RCT research, characterized as having the highest reliability, and RWE research, which reflects the actual clinical aspects, can have a mutually supplementary relationship. Indeed, once this is proven, the two could comprise the most powerful evidence-based research method in medicine."
+    },
+    {
+      "paperId": "2a8d487622dd3be1a213dd5c700e85a53717d6b7",
+      "externalIds": {
+        "MAG": "2333635604",
+        "DOI": "10.1016/S0093-3619(08)70659-2",
+        "CorpusId": 68365252
+      },
+      "url": "https://www.semanticscholar.org/paper/2a8d487622dd3be1a213dd5c700e85a53717d6b7",
+      "title": "The Connectivity Map: Using Gene-Expression Signatures to Connect Small Molecules, Genes, and Disease",
+      "venue": "",
+      "year": 2007,
+      "citationCount": 259,
+      "influentialCitationCount": 17,
+      "openAccessPdf": {
+        "url": "",
+        "status": "CLOSED",
+        "license": null,
+        "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1016/S0093-3619(08)70659-2?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/S0093-3619(08)70659-2, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": null,
+      "authors": [
+        {
+          "authorId": "2033355",
+          "name": "B. Thiers"
+        }
+      ],
+      "abstract": null
+    },
+    {
+      "paperId": "7d83ad0544ecfc3921e5ef70a9f85017c237e147",
+      "externalIds": {
+        "PubMedCentral": "2464610",
+        "MAG": "2039936465",
+        "DBLP": "journals/bmcbi/ZhangG08",
+        "ArXiv": "0801.4278",
+        "DOI": "10.1186/1471-2105-9-258",
+        "CorpusId": 6892696,
+        "PubMed": "18518950"
+      },
+      "url": "https://www.semanticscholar.org/paper/7d83ad0544ecfc3921e5ef70a9f85017c237e147",
+      "title": "A simple and robust method for connecting small-molecule drugs using gene-expression signatures",
+      "venue": "BMC Bioinformatics",
+      "year": 2008,
+      "citationCount": 114,
+      "influentialCitationCount": 6,
+      "openAccessPdf": {
+        "url": "https://bmcbioinformatics.biomedcentral.com/counter/pdf/10.1186/1471-2105-9-258",
+        "status": "GOLD",
+        "license": "CCBY",
+        "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/0801.4278, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "48691224",
+          "name": "Shu-Dong Zhang"
+        },
+        {
+          "authorId": "2661116",
+          "name": "T. Gant"
+        }
+      ],
+      "abstract": "BackgroundInteraction of a drug or chemical with a biological system can result in a gene-expression profile or signature characteristic of the event. Using a suitably robust algorithm these signatures can potentially be used to connect molecules with similar pharmacological or toxicological properties by gene expression profile. Lamb et al first proposed the Connectivity Map [Lamb et al (2006), Science 313, 1929\u20131935] to make successful connections among small molecules, genes, and diseases using genomic signatures.ResultsHere we have built on the principles of the Connectivity Map to present a simpler and more robust method for the construction of reference gene-expression profiles and for the connection scoring scheme, which importantly allows the valuation of statistical significance of all the connections observed. We tested the new method with two randomly generated gene signatures and three experimentally derived gene signatures (for HDAC inhibitors, estrogens, and immunosuppressive drugs, respectively). Our testing with this method indicates that it achieves a higher level of specificity and sensitivity and so advances the original method.ConclusionThe method presented here not only offers more principled statistical procedures for testing connections, but more importantly it provides effective safeguard against false connections at the same time achieving increased sensitivity. With its robust performance, the method has potential use in the drug development pipeline for the early recognition of pharmacological and toxicological properties in chemicals and new drug candidates, and also more broadly in other 'omics sciences."
+    },
+    {
+      "paperId": "15e2133f9c437e8beb355e53dbd5815bd7600365",
+      "externalIds": {
+        "PubMedCentral": "12000858",
+        "DOI": "10.1111/dom.16364",
+        "CorpusId": 277623935,
+        "PubMed": "40196933"
+      },
+      "url": "https://www.semanticscholar.org/paper/15e2133f9c437e8beb355e53dbd5815bd7600365",
+      "title": "Real\u2010world evidence on the utilization, clinical and comparative effectiveness, and adverse effects of newer GLP\u20101RA\u2010based weight\u2010loss therapies",
+      "venue": "Diabetes, obesity and metabolism",
+      "year": 2025,
+      "citationCount": 70,
+      "influentialCitationCount": 4,
+      "openAccessPdf": {
+        "url": "https://doi.org/10.1111/dom.16364",
+        "status": "HYBRID",
+        "license": "CCBYNC",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC12000858, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle",
+        "Review"
+      ],
+      "authors": [
+        {
+          "authorId": "2303194605",
+          "name": "R. Thomsen"
+        },
+        {
+          "authorId": "2253445609",
+          "name": "Aur\u00e9lie Mailhac"
+        },
+        {
+          "authorId": "2354204515",
+          "name": "J. B. L\u00f8hde"
+        },
+        {
+          "authorId": "2237123760",
+          "name": "A. Potteg\u00e5rd"
+        }
+      ],
+      "abstract": "Glucagon\u2010like peptide\u20101 receptor agonists (GLP\u20101RAs) have emerged as key agents for weight management, based on their marked efficacy as observed in randomized controlled trials. While still limited, real\u2010world studies on GLP\u20101RA use in populations with obesity are increasingly available. This narrative review discusses contemporary real\u2010world evidence demonstrating the utilization, clinical and comparative effectiveness, and adverse effects of the currently approved GLP\u20101RA\u2010based weight\u2010loss therapies, that is, liraglutide, semaglutide and tirzepatide. The observed weight reduction in clinical practice overall tends to be lower than in randomized controlled trials; however, outcomes approach those seen in trials when focusing on highly adherent patients. Real\u2010world studies demonstrate high discontinuation rates of GLP\u20101RAs (20%\u201350%) within the first year, and the use of much lower doses than those evaluated in clinical trials. Evidence from observational studies within type 2 diabetes or obesity populations suggests frequent gastrointestinal disturbances in GLP\u20101RA users, as also observed in trials, but no clear increase in risks of severe events like pancreatitis or pancreatic cancer, thyroid disorders, or depression and self\u2010harm. Further evidence is needed to understand possible real\u2010world associations of GLP\u20101RAs with eye disease and other rare outcomes. We provide 10 areas of particular importance for further research on GLP\u20101RA within the real\u2010world space, including improved understanding of the exact drivers of early discontinuation and suboptimal dosing, studies of the effects of stopping GLP\u20101RA treatment, and investigations of clinical and cost\u2010effectiveness for hard clinical outcomes in real\u2010world settings, including not only cardio\u2010reno\u2010metabolic outcomes but also obesity\u2010induced diseases like neuropsychiatric disease, cancer, musculoskeletal disease, and infections."
+    },
+    {
+      "paperId": "ad92d8658ca06f41c9621f31c0c0534ed57543a3",
+      "externalIds": {
+        "PubMedCentral": "3208109",
+        "MAG": "2114547039",
+        "DOI": "10.1007/s11882-011-0222-7",
+        "CorpusId": 16906177,
+        "PubMed": "21927929"
+      },
+      "url": "https://www.semanticscholar.org/paper/ad92d8658ca06f41c9621f31c0c0534ed57543a3",
+      "title": "Reassessing the Evidence Hierarchy in Asthma: Evaluating Comparative Effectiveness",
+      "venue": "Current Allergy and Asthma Reports",
+      "year": 2011,
+      "citationCount": 43,
+      "influentialCitationCount": 1,
+      "openAccessPdf": {
+        "url": "https://link.springer.com/content/pdf/10.1007/s11882-011-0222-7.pdf",
+        "status": "HYBRID",
+        "license": "CCBYNC",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC3208109, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "Review",
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "2262614240",
+          "name": "D. Price"
+        },
+        {
+          "authorId": "2807812",
+          "name": "A. Chisholm"
+        },
+        {
+          "authorId": "7374530",
+          "name": "T. van der Molen"
+        },
+        {
+          "authorId": "2231099845",
+          "name": "Nicolas Roche"
+        },
+        {
+          "authorId": "4040466",
+          "name": "E. Hillyer"
+        },
+        {
+          "authorId": "2384462502",
+          "name": "J. Bousquet"
+        }
+      ],
+      "abstract": "Classical randomized controlled trials are the gold standard in medical evidence because of their high internal validity. However, their necessarily strict design can limit their external validity and the ability to extrapolate these data to real world patients. Therefore, alternatively designed studies may play a complementary role in evaluating the comparative effectiveness of therapies in nonidealized patients in more naturalistic, real world settings. Observational studies have high external validity and can evaluate real world outcomes. Their strength lies in hypothesis generation and testing and in identifying areas in which further clinical trials may be required. Pragmatic trials are designed to maximize applicability of trial results to usual care settings by relying on clinically important outcomes and enrolling a wide range of participants. A combination of these approaches is preferable and necessary."
+    },
+    {
+      "paperId": "45c078cf17182fdea972ec47136b23e4f71da565",
+      "externalIds": {
+        "PubMedCentral": "8129523",
+        "DOI": "10.3389/fphar.2021.660710",
+        "CorpusId": 233486545,
+        "PubMed": "34017257"
+      },
+      "url": "https://www.semanticscholar.org/paper/45c078cf17182fdea972ec47136b23e4f71da565",
+      "title": "Strategy, Progress, and Challenges of Drug Repurposing for Efficient Antiviral Discovery",
+      "venue": "Frontiers in Pharmacology",
+      "year": 2021,
+      "citationCount": 28,
+      "influentialCitationCount": 2,
+      "openAccessPdf": {
+        "url": "https://www.frontiersin.org/articles/10.3389/fphar.2021.660710/pdf",
+        "status": "GOLD",
+        "license": "CCBY",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC8129523, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "Review",
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "50080431",
+          "name": "Xinlei Li"
+        },
+        {
+          "authorId": "49809922",
+          "name": "T. Peng"
+        }
+      ],
+      "abstract": "Emerging or re-emerging viruses are still major threats to public health. Prophylactic vaccines represent the most effective way to prevent virus infection; however, antivirals are more promising for those viruses against which vaccines are not effective enough or contemporarily unavailable. Because of the slow pace of novel antiviral discovery, the high disuse rates, and the substantial cost, repurposing of the well-characterized therapeutics, either approved or under investigation, is becoming an attractive strategy to identify the new directions to treat virus infections. In this review, we described recent progress in identifying broad-spectrum antivirals through drug repurposing. We defined the two major categories of the repurposed antivirals, direct-acting repurposed antivirals (DARA) and host-targeting repurposed antivirals (HTRA). Under each category, we summarized repurposed antivirals with potential broad-spectrum activity against a variety of viruses and discussed the possible mechanisms of action. Finally, we proposed the potential investigative directions of drug repurposing."
+    },
+    {
+      "paperId": "25a46276b53a66925e66601b1005d155e29e7c5b",
+      "externalIds": {
+        "MAG": "3037666169",
+        "DOI": "10.1016/j.jtcvs.2020.06.063",
+        "CorpusId": 221405859,
+        "PubMed": "32868066"
+      },
+      "url": "https://www.semanticscholar.org/paper/25a46276b53a66925e66601b1005d155e29e7c5b",
+      "title": "Trial sequential analysis in meta-analyses: A clinically oriented approach with real-world example.",
+      "venue": "Journal of Thoracic and Cardiovascular Surgery",
+      "year": 2020,
+      "citationCount": 18,
+      "influentialCitationCount": 1,
+      "openAccessPdf": {
+        "url": "http://www.jtcvs.org/article/S0022522320317955/pdf",
+        "status": "BRONZE",
+        "license": "publisher-specific-oa",
+        "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.jtcvs.2020.06.063?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.jtcvs.2020.06.063, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "Editorial"
+      ],
+      "authors": [
+        {
+          "authorId": "51170919",
+          "name": "J. Chan"
+        },
+        {
+          "authorId": "13723500",
+          "name": "A. Harky"
+        }
+      ],
+      "abstract": "Ranked high on the hierarchy of evidence, meta-analyses are important summaries of the existing literature, often influencing clinical practice and guidelines. However, as evidence accumulates, random errors may at times lead to spuriously significant results, and an increasing frequency of statistical testing by meta-analyses increases the likelihood of such being reported; that is, type 1 error. Therefore, trial sequential analysis (TSA) has been developed to adjust for this increase in type 1 error. TSA is conceptually similar to sequential interim analyses of randomized controlled trials, where trial results are tested at regular intervals to determine whether a certain difference due to the intervention, or the lack thereof, has been conclusively demonstrated by existing data, allowing the trial to be terminated. In TSA of meta-analyses, data from each study is analogous to data added during each sequential interim analysis. Statistical techniques are used to adjust and increase the threshold for statistical significance (z-score threshold; conventionally corresponds to a P value of .05) based on the effect to be observed, incidence of outcome in the control arm, information size (a statistical measure of the amount of data analyzed), and heterogeneity. Simply put, a large effect (eg, 90% relative risk reduction [RRR]) observed from data with minimal heterogeneity requires smaller information sizes for the observation to be conclusive than a small effect (eg, 10% RRR) observed from data with significant heterogeneity. As such, TSAmay be used to determine whether certain effects (ie, differences between 2 arms, such as a 25%RRR) may be considered conclusive in"
+    },
+    {
+      "paperId": "2883b50be819adfaf0837d41d2e0103a347ed7e1",
+      "externalIds": {
+        "MAG": "2046730469",
+        "DOI": "10.1016/j.toxlet.2008.08.009",
+        "CorpusId": 6701041,
+        "PubMed": "18801419"
+      },
+      "url": "https://www.semanticscholar.org/paper/2883b50be819adfaf0837d41d2e0103a347ed7e1",
+      "title": "Similar compounds searching system by using the gene expression microarray database.",
+      "venue": "Toxicology Letters",
+      "year": 2009,
+      "citationCount": 18,
+      "influentialCitationCount": 0,
+      "openAccessPdf": {
+        "url": "",
+        "status": "CLOSED",
+        "license": null,
+        "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.toxlet.2008.08.009?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.toxlet.2008.08.009, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "JournalArticle",
+        "Study"
+      ],
+      "authors": [
+        {
+          "authorId": "6907209",
+          "name": "Hiroyoshi Toyoshiba"
+        },
+        {
+          "authorId": "151464454",
+          "name": "H. Sawada"
+        },
+        {
+          "authorId": "14088147",
+          "name": "I. Naeshiro"
+        },
+        {
+          "authorId": "5882520",
+          "name": "A. Horinouchi"
+        }
+      ],
+      "abstract": null
+    },
+    {
+      "paperId": "a3ad36337562ea33f12acf66c3bde251ae0b97b2",
+      "externalIds": {
+        "PubMedCentral": "11878099",
+        "DOI": "10.3389/fpubh.2025.1512429",
+        "CorpusId": 276457984,
+        "PubMed": "40041193"
+      },
+      "url": "https://www.semanticscholar.org/paper/a3ad36337562ea33f12acf66c3bde251ae0b97b2",
+      "title": "The relevance of the real-world evidence in research, clinical, and regulatory decision making",
+      "venue": "Frontiers in Public Health",
+      "year": 2025,
+      "citationCount": 16,
+      "influentialCitationCount": 0,
+      "openAccessPdf": {
+        "url": "https://doi.org/10.3389/fpubh.2025.1512429",
+        "status": "GOLD",
+        "license": "CCBY",
+        "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC11878099, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+      },
+      "publicationTypes": [
+        "Review",
+        "JournalArticle"
+      ],
+      "authors": [
+        {
+          "authorId": "2253578842",
+          "name": "Valton Costa"
+        },
+        {
+          "authorId": "2321579843",
+          "name": "Marcelo Graziano Custodio"
+        },
+        {
+          "authorId": "4469357",
+          "name": "E. Gefen"
+        },
+        {
+          "authorId": "2252425254",
+          "name": "F. Fregni"
+        }
+      ],
+      "abstract": "The scientific method has been established as the optimal approach for systematically gathering and interpreting data on various human phenomena, mainly through the adoption of strict experimental methods, such as controlled randomized trials, which is relevant for clinical decision-making and research, but also weights the regulatory processes for approval of drugs and other medical products. However, a key factor in strict methods is the generalizability of findings that may be limited to specific settings and patient characteristics. This limitation can be addressed by non-experimental methods aimed at investigating populations in naturalistic routine clinical settings, which may offer a more representative reflection of the usage, effectiveness, and safety of healthcare interventions. These approaches can generate the so-called real-world data and the resulting real-world evidence. In this narrative review, we present these concepts, explore the potential applications and advantages of real-world evidence for clinical, research, and regulatory decision-making, and discuss the challenges of employing it, the solutions to improve its generation, and lastly the current level of evidence required for the integration of real-world evidence into regulatory decision-making. We concluded that the advantages of using it, when utilized in a balanced manner, overcome the challenges and, therefore, can offer a time- and cost-saving solution for researchers, the healthcare industry, regulatory agencies, policymakers, and payers towards the patient benefit. The knowledge generated by this approach provides valuable additional insights into medical interventions in real patients under realistic daily scenarios."
+    }
+  ]
+}

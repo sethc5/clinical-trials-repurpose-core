@@ -764,6 +764,26 @@ The repurposing pipeline and biochem-pipeline-core address the same ultimate que
 
 ---
 
+## Evidence Ledger (Policy Justification)
+
+This repo includes an explicit policy evidence ledger under `reference/` so gate and profile decisions are auditable:
+
+- `reference/decisions/` — decision memos tied to config changes
+- `reference/claims/` — claim IDs mapped to sources
+- `reference/sources/semantic_scholar/` — fetched citation bundles
+
+Semantic Scholar pull script:
+
+```bash
+python3 scripts/fetch_semantic_scholar_refs.py \
+  --query "drug repurposing progress challenges recommendations" \
+  --query "network-based drug repurposing method review" \
+  --tag clinical_policy_refresh \
+  --limit 8
+```
+
+---
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Highest value contributions:
