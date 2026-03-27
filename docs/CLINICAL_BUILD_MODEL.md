@@ -18,6 +18,9 @@ This lets us generate:
 - `biochem_intake_candidates`: candidate rows with normalized fields and `source_row_json`
 - Profile YAML: `configs/clinical_build_profiles.yaml`
 
+Import compatibility note:
+- If legacy biochem packages omit `rank_t1`, intake import backfills `rank_t1` from ascending `t1_score` order so rank-based gates remain usable.
+
 ## Knobs / Sliders
 Profile knobs live in YAML and are versioned:
 

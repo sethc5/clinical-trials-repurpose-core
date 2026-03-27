@@ -115,3 +115,40 @@ def test_import_idempotency(tmp_path: Path) -> None:
     content = index_path.read_text(encoding="utf-8")
     marker = f"| clinical | intake_from_biochem | {run_id} |"
     assert content.count(marker) == 1
+
+
+def test_import_backfills_rank_t1_when_missing(tmp_path: Path) -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    script_path = repo_root / "scripts" / "import_biochem_handoff.py"
+    package_dir = tmp_path / "legacy_pkg"
+    suite_root = tmp_path / "suite_handoff"
+    db_path = tmp_path / "clinical.db"
+    run_id = "20260327_1500_clinical_intake_legacy_rank"
+
+    _write_package(
+        package_dir,
+        (
+            "compound_id,smiles,target_id,t1_score,t2_rmsd,t2_persistence\n"
+            "cmp2,CCC,InhA,-10.10,2.8,0.7\n"
+            "cmp1,CCO,InhA,-10.90,2.2,0.8\n"
+        ),
+    )
+
+    proc = _run_import(script_path, package_dir, suite_root, db_path, run_id)
+    assert proc.returncode == 0, proc.stderr
+
+    conn = sqlite3.connect(db_path)
+    try:
+        rows = conn.execute(
+            """
+            SELECT compound_id, rank_t1
+            FROM biochem_intake_candidates
+            WHERE intake_run_id=?
+            ORDER BY compound_id
+            """,
+            (run_id,),
+        ).fetchall()
+    finally:
+        conn.close()
+
+    assert rows == [("cmp1", 1), ("cmp2", 2)]

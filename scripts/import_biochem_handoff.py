@@ -129,7 +129,19 @@ def _read_candidates(path: Path) -> list[dict]:
                     "source_row_json": normalized,
                 }
             )
+        _backfill_missing_ranks(candidates)
         return candidates
+
+
+def _backfill_missing_ranks(candidates: list[dict]) -> None:
+    """Backfill rank fields when legacy exports omit explicit rank columns."""
+    ranked_t1 = sorted(
+        [c for c in candidates if c.get("score_t1") is not None],
+        key=lambda c: (float(c["score_t1"]), c["compound_id"]),
+    )
+    for idx, candidate in enumerate(ranked_t1, start=1):
+        if candidate.get("rank_t1") is None:
+            candidate["rank_t1"] = idx
 
 
 def import_package(
