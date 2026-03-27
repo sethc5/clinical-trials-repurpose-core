@@ -38,6 +38,8 @@ log = logging.getLogger(__name__)
 
 _FTO_URL = os.environ.get("FTO_SERVICE_URL", "http://localhost:8010")
 _TIMEOUT = int(os.environ.get("FTO_TIMEOUT", "120"))
+_API_VERSION = os.environ.get("FTO_API_VERSION", "1.1")
+_SUPPORTED_CONTRACTS = {"fto.v1"}
 
 
 @dataclass
@@ -50,6 +52,10 @@ class FTOResult:
     carve_out_possible: bool = False       # True if § 505(b)(2) labeling carve-out applies
     clear_territories: list[str] = field(default_factory=list)
     design_around_suggestions: list[str] = field(default_factory=list)
+    api_version: str = _API_VERSION
+    contract_version: str = "fto.v1"
+    service: str = "patent-fto-core"
+    client_ref: str | None = None
     cached: bool = False
     error: str | None = None              # set when service is unavailable
 
@@ -62,6 +68,7 @@ def check_fto(
     indication: str,
     smiles: str | None = None,
     jurisdictions: list[str] | None = None,
+    client_ref: str | None = None,
     use_cache: bool = True,
 ) -> FTOResult:
     """Call the FTO service for a drug repurposing candidate.
@@ -76,9 +83,12 @@ def check_fto(
         jurisdictions = ["US"]
 
     payload: dict = {
+        "api_version": _API_VERSION,
+        "client_repo": "clinical-trials-repurpose-core",
         "drug_name": drug_name,
         "indication": indication,
         "use_type": "repurposed_indication",
+        "client_ref": client_ref,
         "jurisdictions": jurisdictions,
         "use_cache": use_cache,
     }
@@ -93,6 +103,13 @@ def check_fto(
         )
         resp.raise_for_status()
         d = resp.json()
+        contract_version = d.get("contract_version") or ""
+        if contract_version and contract_version not in _SUPPORTED_CONTRACTS:
+            log.warning(
+                "FTO response contract mismatch: expected %s got %s",
+                sorted(_SUPPORTED_CONTRACTS),
+                contract_version,
+            )
         return FTOResult(
             risk_level=d["risk_level"],
             drug_name=drug_name,
@@ -102,6 +119,10 @@ def check_fto(
             carve_out_possible=d.get("carve_out_possible", False),
             clear_territories=d.get("clear_territories", []),
             design_around_suggestions=d.get("design_around_suggestions", []),
+            api_version=d.get("api_version", _API_VERSION),
+            contract_version=d.get("contract_version", "fto.v1"),
+            service=d.get("service", "patent-fto-core"),
+            client_ref=d.get("client_ref"),
             cached=d.get("cached", False),
         )
     except requests.exceptions.ConnectionError:

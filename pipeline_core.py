@@ -229,6 +229,7 @@ def run_t2(pair: dict, config: PipelineConfig, db: RepurposingDB) -> dict:
         drug_name=drug.get("name") or drug["drug_id"],
         indication=indication.get("name") or indication["indication_id"],
         smiles=drug.get("smiles"),
+        client_ref=f"{drug['drug_id']}::{indication['indication_id']}",
     )
     if fto.risk_level != "UNKNOWN":
         db.update_fto(
