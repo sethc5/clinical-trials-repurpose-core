@@ -45,3 +45,5 @@ gseapy>=1.1
 # ── Notebook / dev ────────────────────────────────────────────────────────
 jupyter>=1.0       # optional; for exploratory notebooks
 ipykernel>=6.0
+pytest>=8.0        # needed for make test
+pytest-cov>=5.0
