@@ -1,5 +1,7 @@
 # clinical-trial-repurposing-pipeline-core
 # Python >=3.10 required
+# Optional datum context overlay (pinned source):
+#   pip install -r requirements.txt -r requirements.datum.txt
 
 # ── Config & validation ────────────────────────────────────────────────────
 pydantic>=2.0

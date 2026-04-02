@@ -1,0 +1,4 @@
+# Datum overlay (pinned source)
+# NOTE: PyPI "datum" points to a different project.
+margin>=0.9.23,<1.0.0
+datum @ git+https://github.com/sethc5/datum.git@e5b4d33
