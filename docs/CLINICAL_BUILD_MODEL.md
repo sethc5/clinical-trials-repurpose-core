@@ -3,6 +3,8 @@
 ## Purpose
 Create reusable clinical cohorts from biochem intake packages without rewriting per-candidate logic.
 
+The same model is intentionally reusable for non-biochem candidate classes, including OTC supplements/vitamins/minerals, when those candidates are represented as structured intake rows with provenance.
+
 The model separates:
 - Reusable engine logic (gates + weighted scoring + selection)
 - Per-candidate evidence state (metrics from intake row)
@@ -12,6 +14,22 @@ This lets us generate:
 - Early exploratory build sets
 - Final handoff-quality build sets
 - Deterministic reruns as metrics change
+
+## OTC / Vitamin / Mineral Lane Intent
+
+This repo explicitly supports an evidence-prioritization lane for widely available OTC compounds:
+- supplements
+- vitamins
+- minerals
+
+Target question:
+- Which OTC candidates have the strongest evidence and safest profile against disease-compromised health vectors for a defined indication context?
+
+Policy expectations for this lane:
+- Preserve source/provenance and candidate class metadata.
+- Keep evidence quality stratified (clinical vs mechanistic vs observational).
+- Keep contraindication and interaction risk visible in build outputs.
+- Treat generated outputs as research prioritization artifacts, not prescribing guidance.
 
 ## Inputs
 - `biochem_intake_runs`: one imported intake run

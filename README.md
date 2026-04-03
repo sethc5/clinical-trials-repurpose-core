@@ -1,12 +1,28 @@
 # clinical-trial-repurposing-pipeline-core
 
-**A systematic computational pipeline for drug repurposing discovery — scanning approved drugs, failed trials, and shelved compounds against unmet disease indications using mechanism overlap, safety profiles, and literature evidence.**
+**A systematic computational pipeline for drug repurposing discovery — scanning approved drugs, failed trials, shelved compounds, and high-availability OTC candidates (supplements, vitamins, minerals) against unmet disease indications using mechanism overlap, safety profiles, and literature evidence.**
 
 The FDA has approved ~20,000 drugs and biologics. Another ~4,000 compounds have completed Phase II or Phase III trials and been shelved — not because they failed completely, but because they failed for a specific indication, at a specific dose, in a specific population. The global cost of bringing a new drug from discovery to approval is ~$2.6 billion and 12-15 years. Repurposing an approved drug costs ~$300 million and 3-7 years because safety data already exists. The opportunity is enormous and systematically underexplored.
 
 ClinicalTrials.gov has 480,000+ registered trials. PubMed has 35 million papers. OpenFDA has complete adverse event and approval databases. The data to identify repurposing opportunities computationally is public, comprehensive, and largely unscanned at the systematic pipeline level.
 
 This pipeline provides that systematic scanning layer. Unlike biochem-pipeline-core (which screens novel compounds against targets) this pipeline screens **known compounds against novel indications** — the search space is approved drugs × untested disease contexts, filtered by mechanistic plausibility, safety compatibility, and evidence strength.
+
+### OTC / Nutraceutical Intent (Explicit Scope)
+
+This pipeline also supports a dedicated OTC lane for:
+- Widely available supplements
+- Vitamins
+- Minerals
+- Other over-the-counter compounds with public exposure/safety history
+
+Use case:
+- Evaluate these candidates against disease-compromised health vectors (for example, mitochondrial dysfunction, inflammatory burden, metabolic stress, neurocognitive resilience) using the same reproducible T0→T2 evidence flow.
+
+Guardrails:
+- This is evidence triage, not direct treatment advice.
+- Outputs must retain evidence quality labels, contraindication checks, and uncertainty annotations.
+- Clinical actionability requires clinician review and jurisdiction-aware regulatory/safety checks.
 
 Same architectural pattern as [biochem-pipeline-core](https://github.com/sethc5/biochem-pipeline-core), [materials-pipeline-core](https://github.com/sethc5/materials-pipeline-core), [genomics-pipeline-core](https://github.com/sethc5/genomics-pipeline-core), and [soil-microbiome-pipeline-core](https://github.com/sethc5/soil-microbiome-pipeline-core) — 4-tier funnel, SQLite database, receipt system, automated findings generation. The compute layer here is predominantly literature synthesis and network analysis rather than molecular simulation — closer to Athanor's core methodology but structured as a systematic screening pipeline with explicit tiers, database accumulation, and ranked outputs.
 
