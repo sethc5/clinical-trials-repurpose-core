@@ -28,6 +28,10 @@ Same architectural pattern as [biochem-pipeline-core](https://github.com/sethc5/
 
 > **Status**: Architecture defined · Core pipeline in development · First instantiation: [longevity-repurposing-pipeline](https://github.com/sethc5/longevity-repurposing-pipeline) · [Contributors welcome](CONTRIBUTING.md)
 
+Documentation map:
+- `docs/DOCS_INDEX.md` (canonical doc/artifact index)
+- `reference/README.md` (evidence/decision ledger contract)
+
 ---
 
 ## What Problem This Solves
