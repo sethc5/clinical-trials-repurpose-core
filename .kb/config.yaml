@@ -1,0 +1,34 @@
+domain: medicine/drug-repurposing
+type: consumer
+version: "0.1.0"
+maintainer: "Seth Cope"
+
+intent: >
+  Systematic computational pipeline for drug repurposing discovery.
+  Scans approved drugs, failed trials, and shelved compounds against
+  unmet disease indications using mechanism overlap and safety profiles.
+
+needs_from_kb:
+  biochem-kb:
+    - ic50-definition
+    - therapeutic-index
+    - dose-response-curve
+    - receptor-binding-kd
+    - cyp450-drug-metabolism
+    - bioavailability-definition
+    - first-pass-metabolism
+    - blood-brain-barrier
+    - drug-half-life
+    - ld50-definition
+  chemistry-kb:
+    - equilibrium-constant
+    - henderson-hasselbalch
+    - hydrogen-bonding
+    - van-der-waals-forces
+
+produces:
+  - type: claim
+    domain: pharmacology
+    example: "Metformin shows mechanism overlap with Alzheimer's via AMPK/mTOR"
+    confidence: moderate
+    source_type: data

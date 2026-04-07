@@ -1,0 +1,15 @@
+project:
+  name: "GIST Test"
+  description: "Gastrointestinal stromal tumor - imatinib repurposing test"
+
+target:
+  id: GIST_KIT
+  disease_context: "Gastrointestinal stromal tumor (GIST) — KIT/PDGFRA driven"
+  description: "Rare mesenchymal tumor of the GI tract driven by gain-of-function KIT or PDGFRA mutations"
+  unmet_need: "Imatinib resistance in exon 9 and secondary mutations leaves patients without durable options"
+  pathway_ids: ["RTK_KIT", "PI3K_MTOR"]
+  evidence_threshold: 0.4
+
+output:
+  db_path: "results/test_gist.db"
+  results_dir: "results/"

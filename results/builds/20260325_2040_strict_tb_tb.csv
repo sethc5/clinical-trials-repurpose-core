@@ -1,0 +1,3 @@
+build_run_id,intake_run_id,compound_id,target_id,included,rank_included,score,include_reason,metrics_json
+20260325_2040_strict_tb_tb,20260325_2030_clinical_intake_tb,cmp_ok,KasA_mtb,1,1,0.622222,selected,"{""t1_score"":-10.8,""t2_score"":null,""rank_t1"":null,""rank_t2"":null,""t2_rmsd"":5.2,""t2_persistence"":0.1,""gate_pass"":true,""gate_reasons"":[],""score_components"":{""t1_score"":0.6222222222222225}}"
+20260325_2040_strict_tb_tb,20260325_2030_clinical_intake_tb,cmp_missing_t2,KasA_mtb,0,,0.688889,gate_fail:missing_t2_metrics,"{""t1_score"":-11.1,""t2_score"":null,""rank_t1"":null,""rank_t2"":null,""t2_rmsd"":null,""t2_persistence"":null,""gate_pass"":false,""gate_reasons"":[""missing_t2_metrics""],""score_components"":{""t1_score"":0.6888888888888889}}"
