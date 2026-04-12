@@ -2,6 +2,24 @@
 
 Purpose: canonical map for where clinical docs live, where artifacts are written, and where cross-repo handoff contracts are defined.
 
+## Canonical Hierarchy
+
+- Shared suite source-of-truth rules:
+  - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_CANONICAL_HIERARCHY.md`
+- Shared stack model canonical source:
+  - `/home/seth/dev/medicine/biochem-pipeline-core/docs/PIPELINE_MODEL.md`
+- Shared product roots canonical source:
+  - `/home/seth/dev/medicine/biochem-pipeline-core/docs/PRODUCT_ROOTS.md`
+- Shared package contract checklist:
+  - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_PACKAGE_CONTRACT.md`
+- This repo's `docs/PIPELINE_MODEL.md` is a thin local bridge to canonical.
+
+## Session Start Order
+
+1. Read suite canonical hierarchy.
+2. Read suite package contract checklist.
+3. Read this repo's Start Here list below.
+
 ## Start Here
 
 1. `README.md` — scope, tier semantics, and operating intent.
@@ -9,8 +27,6 @@ Purpose: canonical map for where clinical docs live, where artifacts are written
 3. `docs/SUITE_ORCHESTRATION.md` — supervised MVP orchestration flow.
 4. `reference/README.md` — evidence-backed decision ledger policy.
 5. `docs/COST_OPTIMIZED_COMPUTE_PLAN.md` — compute/cost guardrails.
-
-Working draft (not canonical): `docs/PIPELINE_MODEL.md` may exist locally but is not part of tracked canonical docs in this repo.
 
 ## Canonical Artifact Locations
 

@@ -30,6 +30,9 @@ Same architectural pattern as [biochem-pipeline-core](https://github.com/sethc5/
 
 Documentation map:
 - `docs/DOCS_INDEX.md` (canonical doc/artifact index)
+- `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_CANONICAL_HIERARCHY.md` (suite source-of-truth and anti-drift rules)
+- `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_PACKAGE_CONTRACT.md` (shared handoff package contract checklist)
+- `/home/seth/dev/medicine/biochem-pipeline-core/docs/PRODUCT_ROOTS.md` (cross-repo product roots)
 - `reference/README.md` (evidence/decision ledger contract)
 
 ---
