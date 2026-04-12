@@ -6,13 +6,15 @@ Purpose: canonical map for where clinical docs live, where artifacts are written
 
 - Shared suite source-of-truth rules:
   - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_CANONICAL_HIERARCHY.md`
-- Shared stack model canonical source:
+- Shared live pipeline-state canonical source:
+  - `/home/seth/dev/medicine/biochem-pipeline-core/docs/PIPELINE_CANONICAL_STATE.md`
+- Shared historical architecture snapshot (non-canonical):
   - `/home/seth/dev/medicine/biochem-pipeline-core/docs/PIPELINE_MODEL.md`
 - Shared product roots canonical source:
   - `/home/seth/dev/medicine/biochem-pipeline-core/docs/PRODUCT_ROOTS.md`
 - Shared package contract checklist:
   - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_PACKAGE_CONTRACT.md`
-- This repo's `docs/PIPELINE_MODEL.md` is a thin local bridge to canonical.
+- This repo's `docs/PIPELINE_MODEL.md` is a thin local bridge to suite canonical state.
 
 ## Session Start Order
 
