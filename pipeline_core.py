@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import concurrent.futures
 import logging
+import math
 import time
 from pathlib import Path
 from typing import Optional
@@ -261,12 +262,48 @@ def run_t2(pair: dict, config: PipelineConfig, db: RepurposingDB) -> dict:
 # Main pipeline runner
 # ---------------------------------------------------------------------------
 
-def run_pipeline(config: PipelineConfig, max_tier: str = "2", workers: int = 4, llm_workers: int = 2) -> None:
+def _chunk_pairs(pairs: list[dict], n_chunks: int) -> list[list[dict]]:
+    """Split pairs into approximately equal chunks."""
+    if n_chunks < 1:
+        raise ValueError("n_chunks must be >= 1")
+    if not pairs:
+        return []
+    chunk_size = max(1, math.ceil(len(pairs) / n_chunks))
+    return [pairs[i : i + chunk_size] for i in range(0, len(pairs), chunk_size)]
+
+
+def run_pipeline(
+    config: PipelineConfig,
+    max_tier: str = "2",
+    workers: int = 4,
+    llm_workers: int = 2,
+    chunk_id: Optional[int] = None,
+    n_chunks: int = 1,
+) -> None:
     db = RepurposingDB(config.output.db_path)
     db.init_schema()
     receipt = ReceiptSystem(config.output.receipts_dir)
 
-    pairs = db.get_all_drug_indication_pairs()
+    all_pairs = db.get_all_drug_indication_pairs()
+    pairs = all_pairs
+    if chunk_id is not None:
+        chunks = _chunk_pairs(all_pairs, n_chunks)
+        if chunk_id < 0 or chunk_id >= len(chunks):
+            pairs = []
+            log.warning(
+                "Chunk %s/%s has no assigned pairs; proceeding with 0 pairs",
+                chunk_id,
+                n_chunks,
+            )
+        else:
+            pairs = chunks[chunk_id]
+        log.info(
+            "Chunk mode: selected chunk %s/%s (%s/%s pairs)",
+            chunk_id,
+            n_chunks,
+            len(pairs),
+            len(all_pairs),
+        )
     log.info(f"Starting pipeline: {len(pairs)} pairs, max tier T{max_tier}")
 
     batch_start = time.time()
@@ -349,11 +386,34 @@ def main() -> None:
                         help="Maximum tier to run (default: 2 = full pipeline)")
     parser.add_argument("-w", "--workers", type=int, default=8)
     parser.add_argument("--llm-workers", type=int, default=3)
+    parser.add_argument(
+        "--chunk-id",
+        type=int,
+        default=None,
+        help="Optional chunk index for distributed execution",
+    )
+    parser.add_argument(
+        "--n-chunks",
+        type=int,
+        default=1,
+        help="Total number of distributed chunks",
+    )
     args = parser.parse_args()
+    if args.n_chunks < 1:
+        parser.error("--n-chunks must be >= 1")
+    if args.chunk_id is not None and args.chunk_id >= args.n_chunks:
+        parser.error("--chunk-id must be < --n-chunks")
 
     raw = yaml.safe_load(Path(args.config).read_text())
     config = PipelineConfig(**raw)
-    run_pipeline(config, max_tier=args.tier, workers=args.workers, llm_workers=args.llm_workers)
+    run_pipeline(
+        config,
+        max_tier=args.tier,
+        workers=args.workers,
+        llm_workers=args.llm_workers,
+        chunk_id=args.chunk_id,
+        n_chunks=args.n_chunks,
+    )
 
 
 if __name__ == "__main__":

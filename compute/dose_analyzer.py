@@ -69,8 +69,15 @@ def analyze_dose(
     mechanism = (drug.get("mechanism_of_action") or "unknown")[:400]
     indication_name = indication.get("name") or indication.get("indication_id")
     approved_dose = _extract_approved_dose(drug)
-    priority_mechanisms = getattr(indication, "priority_mechanisms", [])
+    priority_mechanisms = indication.get("priority_mechanisms", [])
+    if isinstance(priority_mechanisms, str):
+        try:
+            decoded = json.loads(priority_mechanisms)
+            priority_mechanisms = decoded if isinstance(decoded, list) else []
+        except Exception:
+            priority_mechanisms = []
     target_mechanism = ", ".join(priority_mechanisms[:3]) if isinstance(priority_mechanisms, list) else ""
+    dose_evidence = _extract_dose_evidence(indication)
 
     prompt = DOSE_PROMPT.format(
         drug_name=drug_name,
@@ -78,7 +85,7 @@ def analyze_dose(
         mechanism=mechanism,
         indication_name=indication_name,
         target_mechanism=target_mechanism or "target mechanism not specified",
-        dose_evidence="See literature evidence (not yet available in this stub).",
+        dose_evidence=dose_evidence,
         pk_computed=_compute_pk_context(drug),
     )
 
@@ -159,3 +166,29 @@ def _extract_approved_dose(drug: dict) -> str:
     pharmacodynamics = drug.get("pharmacodynamics") or ""
     half_life = drug.get("half_life") or "unknown"
     return f"Half-life: {half_life}. Pharmacodynamics: {pharmacodynamics[:200]}"
+
+
+def _extract_dose_evidence(indication: dict) -> str:
+    """
+    Pull the best available dose-relevant evidence text from indication payload.
+    """
+    candidate_fields = (
+        "dose_evidence",
+        "t2_evidence_summary",
+        "evidence_summary",
+        "clinical_notes",
+    )
+    for field in candidate_fields:
+        value = indication.get(field)
+        if not value:
+            continue
+        if isinstance(value, str):
+            text = value.strip()
+            if text:
+                return text[:1200]
+        if isinstance(value, (dict, list)):
+            try:
+                return json.dumps(value, ensure_ascii=True)[:1200]
+            except Exception:
+                continue
+    return "No dose-specific evidence supplied in indication payload."

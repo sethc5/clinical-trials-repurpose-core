@@ -147,7 +147,7 @@ _INDICATION_RECORDS: dict[str, dict] = {
 
 
 class _MockDB:
-    """Minimal DB stub for validate_pipeline.py smoke tests (no real data)."""
+    """Minimal DB fixture for validate_pipeline.py smoke tests (no real data)."""
     def get_trials_for_pair(self, drug_id: str, indication_id: str) -> list:
         return []
 

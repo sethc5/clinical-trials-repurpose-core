@@ -16,6 +16,9 @@ Purpose: canonical map for where clinical docs live, where artifacts are written
   - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_PACKAGE_CONTRACT.md`
 - This repo's `docs/PIPELINE_MODEL.md` is a thin local bridge to suite canonical state.
 
+Historical local snapshots:
+- `docs/archive/2026Q1/LAST_MILE_202603.md` (superseded root last-mile strategy snapshot)
+
 ## Session Start Order
 
 1. Read suite canonical hierarchy.

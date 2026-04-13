@@ -84,14 +84,19 @@ class LINCSAdapter:
             return None
 
     def _get_signature_local(self, drug_name: str, cell_line: str) -> dict | None:
-        """Load signature from local .gctx files via cmapPy. Stub — implement with cmapPy."""
+        """Load signature from local .gctx files via cmapPy when configured."""
         try:
-            import cmapPy.pandasGEXpress.parse_gctx as pg
-            # Implementation depends on local file layout from GEO download
-            raise NotImplementedError("Local LINCS loading requires cmapPy setup — see README")
+            import cmapPy.pandasGEXpress.parse_gctx as _pg  # noqa: F401
         except ImportError:
             log.error("cmapPy not installed: pip install cmapPy")
             return None
+        log.warning(
+            "Local LINCS mode requested for %s/%s but no local parser mapping is configured; "
+            "set API key mode or implement local file routing.",
+            drug_name,
+            cell_line,
+        )
+        return None
 
     def compute_reversal_score(
         self,

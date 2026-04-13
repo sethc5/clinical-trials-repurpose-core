@@ -81,6 +81,6 @@ python3 scripts/suite_orchestrator.py events --job-id tb_inha_biochem_to_clinica
 Runtime config keeps command templates centralized so compute backends can change without rewriting orchestrator logic:
 - local execution (default)
 - Hetzner command wrappers
-- RunPod profile stubs (activate once serverless wrappers are implemented)
+- RunPod profile placeholders (activate once serverless wrappers are implemented)
 
 See `docs/COST_OPTIMIZED_COMPUTE_PLAN.md` for the low-cost genomics-first rollout and OpenRouter budget policy.

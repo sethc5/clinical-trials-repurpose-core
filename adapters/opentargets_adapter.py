@@ -123,10 +123,40 @@ class OpenTargetsAdapter:
 
     def get_drug_target_score(self, chembl_id: str, disease_efo_id: str) -> float | None:
         """
-        Look up Open Targets overall evidence score for a specific drug-disease pair.
-        Returns None if not found.
+        Return a pragmatic Open Targets evidence proxy for a drug-disease pair.
+
+        This uses drug indication evidence currently available from the Open Targets
+        drug endpoint and maps `maxPhaseForIndication` to a normalized [0, 1] score:
+          0 -> 0.0, 1 -> 0.25, 2 -> 0.50, 3 -> 0.75, 4 -> 1.0
+
+        Returns None if the pair is not present in Open Targets drug indications.
         """
-        targets = self.get_target_associations(disease_efo_id, top_n=500)
-        # Find targets affected by this drug via target lookup
-        # (simplified — full implementation joins drug targets to disease targets)
-        return None  # stub; implement with drug→target→disease association join
+        indications = self.get_drug_indications(chembl_id)
+        if not indications:
+            return None
+
+        wanted = self._normalize_disease_id(disease_efo_id)
+        phase_values: list[int] = []
+        for row in indications:
+            disease_id = self._normalize_disease_id(row.get("disease_id", ""))
+            if disease_id != wanted:
+                continue
+            phase_raw = row.get("max_phase")
+            try:
+                phase = int(phase_raw)
+            except (TypeError, ValueError):
+                continue
+            if phase < 0:
+                continue
+            phase_values.append(min(phase, 4))
+
+        if not phase_values:
+            return None
+
+        best_phase = max(phase_values)
+        return round(best_phase / 4.0, 4)
+
+    @staticmethod
+    def _normalize_disease_id(value: str) -> str:
+        """Normalize common Open Targets disease ID variants for robust matching."""
+        return (value or "").strip().upper().replace(":", "_")

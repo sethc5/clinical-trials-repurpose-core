@@ -27,6 +27,10 @@ log = logging.getLogger(__name__)
 
 
 def chunk_pairs(pairs: list[dict], n_chunks: int) -> list[list[dict]]:
+    if n_chunks < 1:
+        raise ValueError("n_chunks must be >= 1")
+    if not pairs:
+        return []
     chunk_size = math.ceil(len(pairs) / n_chunks)
     return [pairs[i : i + chunk_size] for i in range(0, len(pairs), chunk_size)]
 
@@ -60,6 +64,9 @@ def main() -> None:
     db = RepurposingDB(config.output.db_path)
     pairs = db.get_all_drug_indication_pairs()
     chunks = chunk_pairs(pairs, args.n_chunks)
+    if not chunks:
+        log.warning("No drug-indication pairs found; nothing to dispatch.")
+        return
     log.info(f"Total pairs: {len(pairs)} → {len(chunks)} chunks of ~{len(chunks[0])} each")
 
     if args.chunk_id is not None:

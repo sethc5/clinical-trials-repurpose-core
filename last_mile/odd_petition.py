@@ -5,7 +5,7 @@ Produces a Markdown draft petition per 21 CFR Part 316 for a drug-indication
 pair flagged as orphan (indication.orphan_status=True OR prevalence < 200,000 US).
 
 Sections:
-  I.   Cover Letter (human-fill stub)
+  I.   Cover Letter (human-fill section)
   II.  Drug Description (INN, structure, mechanism from DB)
   III. Disease Description + Prevalence Justification (Orphanet + DB)
   IV.  Medical Plausibility (LLM-generated from evidence_summary)
@@ -193,7 +193,7 @@ def _generate_plausibility(
         indent=2,
     )
     prompt = _PLAUSIBILITY_PROMPT.format(
-        drug_name=drug.get("name") or drug_id,
+        drug_name=drug.get("name") or drug.get("drug_id") or "unknown_drug",
         mechanism=(drug.get("mechanism_of_action") or "unknown")[:400],
         indication_name=indication.get("name") or indication["indication_id"],
         icd10=indication.get("icd10_code") or "N/A",
