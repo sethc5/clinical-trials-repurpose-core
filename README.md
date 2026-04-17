@@ -33,7 +33,6 @@ Documentation map:
 - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_CANONICAL_HIERARCHY.md` (suite source-of-truth and anti-drift rules)
 - `/home/seth/dev/medicine/biochem-pipeline-core/docs/PIPELINE_CANONICAL_STATE.md` (live shared tier/runtime state)
 - `/home/seth/dev/medicine/biochem-pipeline-core/docs/SUITE_PACKAGE_CONTRACT.md` (shared handoff package contract checklist)
-- `/home/seth/dev/medicine/biochem-pipeline-core/docs/PRODUCT_ROOTS.md` (cross-repo product roots)
 - `reference/README.md` (evidence/decision ledger contract)
 
 ---
