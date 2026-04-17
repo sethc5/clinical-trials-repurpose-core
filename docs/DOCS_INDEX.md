@@ -31,7 +31,6 @@ Historical local snapshots:
 2. `docs/CLINICAL_BUILD_MODEL.md` — reusable build gates/weights, including OTC/vitamin/mineral lane intent.
 3. `docs/SUITE_ORCHESTRATION.md` — supervised MVP orchestration flow.
 4. `reference/README.md` — evidence-backed decision ledger policy.
-5. `docs/COST_OPTIMIZED_COMPUTE_PLAN.md` — compute/cost guardrails.
 
 ## Canonical Artifact Locations
 

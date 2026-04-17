@@ -17,7 +17,6 @@ This file is intentionally thin to prevent drift from the suite canonical model.
 Primary clinical operating docs:
 - `docs/CLINICAL_BUILD_MODEL.md`
 - `docs/SUITE_ORCHESTRATION.md`
-- `docs/COST_OPTIMIZED_COMPUTE_PLAN.md`
 
 These docs are authoritative for clinical-only behavior and operators should prioritize them for day-to-day execution.
 

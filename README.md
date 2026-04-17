@@ -822,10 +822,6 @@ Backend switching is profile-driven:
 - `python3 scripts/suite_orchestrator.py --compute-profile local run-once`
 - `python3 scripts/suite_orchestrator.py --compute-profile hetzner run-once --execute`
 
-Low-cost compute policy and rollout plan:
-- `docs/COST_OPTIMIZED_COMPUTE_PLAN.md`
-- `reference/decisions/2026-03-25_suite_compute_policy_genomics_first.md`
-
 OpenRouter budget presets:
 - `configs/openrouter_budget_profiles.yaml`
 - `scripts/apply_openrouter_profile.py`

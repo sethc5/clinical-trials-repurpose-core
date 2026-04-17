@@ -82,5 +82,3 @@ Runtime config keeps command templates centralized so compute backends can chang
 - local execution (default)
 - Hetzner command wrappers
 - RunPod profile placeholders (activate once serverless wrappers are implemented)
-
-See `docs/COST_OPTIMIZED_COMPUTE_PLAN.md` for the low-cost genomics-first rollout and OpenRouter budget policy.
